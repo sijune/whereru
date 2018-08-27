@@ -1,0 +1,197 @@
+<html>
+    <head>
+        <style>
+        *{
+            border: 1px solid black;
+        }
+            .mycontainer{
+                display:flex;
+                flex-direction:column;
+                height:200vh;
+            }
+            
+            @media(min-width:768px){
+                /*conA*/
+                .contA{
+                    flex:45%;
+                    display:flex;
+                    flex-wrap:wrap;
+                }
+                .contA11{
+                    flex:75%;
+                    height:50%;
+                }
+                .contA12{
+                    flex:25%;
+                    height:50%;
+                }
+                .contA13{
+                    flex:25%;
+                    height:50%;
+                }
+                .contA21{
+                    flex:25%;
+                    height:50%;
+                }
+                .contA22{
+                    flex:50%;
+                    height:50%;
+                }
+                /*conB*/
+                .contB{
+                    flex:10%;
+                    display:flex;
+                }
+                .contB1, .contB2, .contB3 {
+                    flex:1;
+                }
+                /*conC*/
+                .contC{
+                    flex:45%;
+                    display:flex;
+                    flex-wrap:wrap;
+                }
+                .contC1{
+                    flex:25%;
+                    height:50%;
+                }
+                .contC2{
+                    flex:50%;
+                    height:50%;
+                }
+                .contC3{
+                    flex:25%;
+                    height:50%;
+                }
+                .contC4{
+                    flex:50%;
+                    height:50%;
+                }
+                .contC5{
+                    flex:25%;
+                    height:50%;
+                }
+                .contC6{
+                    flex:25%;
+                    height:50%;
+                }
+            }
+            @media(max-width:767px){
+                /*conA*/
+                .contA{
+                    flex:45%;
+                    display:flex;
+                    flex-direction:column;
+                }
+                .contA11{
+                    display:none;
+                }
+                .contA12{
+                    height:33%;
+                }
+                .contA13{
+                    height:33%;
+                }
+                .contA21{
+                   height:33%;
+                }
+                .contA22{
+                    display:none;
+                }
+                /*conB*/
+                .contB{
+                    flex:10%;
+                    display:flex;
+                }
+                .contB1, .contB2 {
+                    flex:1;
+                }
+                .contB3{
+                    display:none;
+                }
+                /*conC*/
+                .contC{
+                    flex:45%;
+                    display:flex;
+                    flex-direction:column;
+                }
+                .contC1{
+                    display:none;
+                }
+                .contC2{
+                    height:33%;
+                }
+                .contC3{
+                    display:none;
+                }
+                .contC4{
+                    height:33%;
+                }
+                .contC5{
+                    height:33%;
+                }
+                .contC6{
+                    height:33%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <section class="main">
+            <div class="mycontainer">
+                <div class="contA">
+                    <div class="contA1">
+                        <div class="contA11">
+                           1 
+                        </div>
+                        <div class="contA12">
+                            2
+                        </div>
+                        <div class="contA13">
+                            3
+                        </div>
+                    </div>
+                    <div class="contA2">
+                        <div class="contA21">
+                            4
+                        </div>
+                        <div class="contA22">
+                            5
+                        </div>
+                    </div>
+                </div>
+                <div class="contB">
+                    <div class="contB1">
+                        1
+                    </div>
+                    <div class="contB2">
+                       2 
+                    </div>
+                    <div class="contB3">
+                        3
+                    </div>
+                </div>
+                <div class="contC">
+                    <div class="contC1">
+                        1
+                    </div>
+                    <div class="contC2">
+                        2
+                    </div>
+                    <div class="contC3">
+                        3
+                    </div>
+                    <div class="contC4">
+                       4 
+                    </div>
+                    <div class="contC5">
+                        5
+                    </div>
+                    <div class="contC6">
+                        6
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

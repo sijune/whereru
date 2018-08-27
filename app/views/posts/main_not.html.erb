@@ -1,0 +1,390 @@
+<%= render "navbar3" %>
+
+ <!-- conA -->
+  <section class="conA" style="margin-top:10px">
+        <div class="container">
+            <div class="conA1">
+                <div class="conA11" style="overflow:hidden">
+                  <!--<img src="https://cf-eba.everytime.kr/20180801_kb_home.png">-->
+                  <div class="slideshow-container">
+                    <div class="mySlides fade">
+                      <div class="numbertext">1 / 3</div>
+                      <img src="http://image.tourbaksa.com/New/Main/Season/2018/6/46f84cf7-d099-4242-91de-6a2fe534ae39.jpg" style="width:100%;">
+                    </div>
+                    
+                    <div class="mySlides fade" >
+                      <div class="numbertext">2 / 3</div>
+                      <img src="http://image.tourbaksa.com/New/Main/Hotspot/2018/6/74fb82d3-dbdd-414b-b949-5179285a5d7b.jpg" style="width:100%">
+                    </div>
+                    
+                    <div class="mySlides fade">
+                      <div class="numbertext">3 / 3</div>
+                      <img src="http://image.tourbaksa.com/New/Main/Hotspot/2018/7/1bf928b2-3fbb-4834-ac11-8eeb9579a0ed.jpg" style="width:100%">
+                    </div>
+                    
+                    </div>
+                    <br>
+                    
+                    <div style="text-align:center" hidden>
+                      <span class="dot"></span> 
+                      <span class="dot"></span> 
+                      <span class="dot"></span> 
+                    </div>
+                    
+                    <script>
+                    var slideIndex = 0;
+                    showSlides();
+                    
+                    function showSlides() {
+                        var i;
+                        var slides = document.getElementsByClassName("mySlides");
+                        var dots = document.getElementsByClassName("dot");
+                        for (i = 0; i < slides.length; i++) {
+                           slides[i].style.display = "none";  
+                        }
+                        slideIndex++;
+                        if (slideIndex > slides.length) {slideIndex = 1}    
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        slides[slideIndex-1].style.display = "block";  
+                        dots[slideIndex-1].className += " active";
+                        setTimeout(showSlides, 2000); // Change image every 2 seconds
+                    }
+                    </script>
+
+                  <h2 hidden>광고</h2>
+                </div>
+                <div class="conA12">
+                    <div class="conA121">
+                      <!--썸네일 사진 핫게시물-->
+                      <div class="card" style="width: 13rem; margin:0 auto;">
+                        <img class="card-img-top" src="https://i0.wp.com/securityaffairs.co/wordpress/wp-content/uploads/2017/08/dohacker.jpg?resize=876%2C659" alt="Card image cap" style="width: 13rem; margin:0 auto;">
+                        <div>
+                          <p style="padding:0.6rem; margin:0;">practice.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="conA122">
+                      <!--싱가폴 자유게시판-->
+                      <div class="conA1221">
+                          <h6><a href="/posts/11/index"><strong>싱가포르 자유게시판</strong></a></h6>
+                      </div>
+                        <!--반복변수-->
+                        <div class="conA1222">
+                          <% posts_11 = Post.where("category_id like ?","#{11}").reverse %>
+                          <% (0..4).each do |i|%>
+                          <div class="postlistA">
+                            <div class="postlistAtext">
+                             <a href="/posts/show/<%= posts_11[i].id %>"><%= posts_11[i].title %></a></br>
+                             </div>
+                          </div>
+                          <% end %>
+                        </div>
+                    </div>
+                </div>
+                <div class="conA13">
+                    <div class="conA131">
+                      <!--썸네일 사진 핫게시물-->
+                      <div class="card" style="width: 13rem; margin:0 auto;">
+                        <img class="card-img-top" src="https://i0.wp.com/securityaffairs.co/wordpress/wp-content/uploads/2017/08/dohacker.jpg?resize=876%2C659" alt="Card image cap">
+                        <div>
+                          <p style="padding:0.6rem; margin:0;">practice.</p>
+                        </div>
+                      </div>
+                    </div>  
+                    <div class="conA132">
+                      <!--싱가폴 뉴스-->
+                      <div class="conA1221">
+                        <h6><a href="/posts/12/index"><strong>싱가포르 뉴스</strong></a></h6>
+                      </div>
+                        <!--반복변수-->
+                        <div class="conA1222">
+                          <% posts_12 = Post.where("category_id like ?","#{12}").reverse %>
+                          <% (0..4).each do |i|%>
+                            <div class="postlistA">
+                              <div class="postlistAtext">
+                              <a href="/posts/show/<%= posts_12[i].id %>"><%= posts_12[i].title %></a></br>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="conA2">
+                <div class="conA21">
+                  <!--싱가폴 실시간 검색어-->
+                  <div class="conA221">
+                  <h6><strong>실시간 인기검색어</strong></h6>
+                  </div>
+                  
+                  <!--검색어 나열-->
+                  <div class="conA1222" >
+                    <% (1..10).each do |i|%>
+                    <% keyword_10 = Keyword.order("value DESC")%>
+                      <div class="postlistA2" style="height: 6.5%;">
+                        <div class="postlistAtext" style="font-size:11.5px">
+                          <span style="color:#007bff;"><%= i %></span> <% if  i != 10 %> <span style="margin-left:10%;"><%= keyword_10[i-1].content %></span></br> <% else %> <span style="margin-left:7%;"><%= keyword_10[i].content %></span></br> <% end %>
+                          </div>
+                        </div>
+                    <% end %>
+                    </div>
+                  </div>
+                        
+                <div class="conA22">
+                  <!--날씨-->
+                </div>
+            </div>
+            <div class="conA3">
+                <div class="conA31">
+                  <!--로그인-->
+                   <div class="leftside">
+                    <div class="card pconly conA311">
+                        <form class="logged">
+                           <% if user_signed_in? %>
+                              <img src="https://cf-fpi.everytime.kr/0.png" class="picture">
+                              <h4 class="nickname" style="padding-top:5px;"><%= current_user.username %></h4>
+                              <p class="username"><a href="/users/sign_out" ><div class="conA3btn">로그아웃</div></a></p>
+                          <% else %>
+                              <p class="username"><a href="/users/sign_in"><div class="conA3btn">로그인</div></a></p>
+                          <% end %>   
+                        </form>
+                    </div>
+                    <div class="card">
+                      <div class="menus">
+                        <div class="menuS">
+                          <a href="/my_profile" class="myarticle"><i class="fas fa-user" style="color: #00FF55"></i>&nbsp;&nbsp; 프로필</a><br>
+                        </div>
+                        <div class="menuS">
+                          <a href="/comments/index" onClick="window.open(this.href, '', 'width=500, height=545'); return false;" class="mycommentarticle"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;&nbsp; 쪽지함</a>
+                        </div>
+                        <div class="menuS">
+                          <a href="/posts/myPost" class="myarticle"><i class="fas fa-list-ul" style="color: #4EAEE9;"></i>&nbsp;&nbsp; 내가 쓴 글</a><br>
+                        </div>
+                        <div class="menuS">
+                          <a href="/posts/myReply" class="mycommentarticle"><i class="far fa-comment" style="color: #A1D88F;"></i>&nbsp;&nbsp; 나의 댓글</a>
+                        </div>
+                        
+                      </div>
+                    </div>
+                </div>
+                </div>
+                <div class="conA32">
+                  <!--광고-->
+                  <h2 hidden>광고</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- conB -->
+    <div class="ConB" >
+        <div class="ConB1">
+          <!--여행사 프로모션-->
+          <div class="ConB1_content">
+            <div class="ConB1_image" style="background-image:URL(https://i0.wp.com/www.von.gov.ng/wp-content/uploads/2018/05/Paris.jpg?fit=1050%2C700&ssl=1)">
+              파리
+              </div>
+              <div class="ConB1_price">890,000</div>
+          </div>
+          <div class="ConB1_content">
+            <div class="ConB1_image" style="background-image:URL(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0-Te_OzWqtQTlLtLyC7eKrLXztM5K5oJUUNCdgLwRZ5qAcraOhQ)">
+              뉴욕
+              </div>
+            <div class="ConB1_price">1,390,000</div>
+          </div>
+          <div class="ConB1_content">
+            <div class="ConB1_image" style="background-image:URL(https://media.timeout.com/images/105157813/630/472/image.jpg)">
+              싱가포르
+              </div>
+            <div class="ConB1_price">590,000</div>
+          </div>
+          <div class="ConB1_content">
+            <div class="ConB1_image" style="background-image:URL(https://abroad.uconn.edu/wp-content/uploads/sites/1729/2013/11/wrocaw-1511660_1920.jpg)">
+              폴란드
+              </div>
+            <div class="ConB1_price">750,000</div>
+          </div>
+        </div>
+        <div class="ConB2">
+          <!--실시간 인기글-->
+          <h3><a href="#"><strong>실시간 글</strong></a></h3>
+          <% posts_realtime = Post.all.reverse %>
+          <% (0..4).each do |i|%>
+            <div class="postlistA">
+              <div class="postlistAtext">
+                 <a class="article" href="/posts/show/<%= posts_realtime[i].id %>"><%= posts_realtime[i].title %></a><br>
+              </div>
+            </div>
+          <% end %>
+        </div>
+    </div>
+
+    <!-- conC -->
+    <div class="ConC">
+        <div class="ConC1">
+            <div class="ConC11">
+              <div class="ConC111">
+                <!--구인-->
+                <div class="conA1221"><h6><a href="/posts/61/index"><strong>구인</strong></a></h6></div>
+                <div class="conA1222">
+                  <% posts_61 = Post.where("category_id like ?","#{61}").reverse %>
+                  <% (0..3).each do |i|%>
+                  <div class="postlistA">
+                  <a href="/posts/show/<%= posts_61[i].id %>"><%= posts_61[i].title %></a><br>
+                  </div>
+                <% end %>
+                </div>
+                
+              </div>
+              <div class="ConC112">
+                <!--구직-->
+                <div class="conA1221"><h6><a href="/posts/62/index"><strong>구직</strong></a></h6></div>
+                <div class="conA1222">
+                  <% posts_62 = Post.where("category_id like ?","#{62}").reverse %>
+                  <% (0..3).each do |i|%>
+                    <div class="postlistA">
+                       <a href="/posts/show/<%= posts_62[i].id %>"><%= posts_62[i].title %></a><br>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="ConC12">
+                <!--광고-->
+                <h2 hidden>광고</h2>
+            </div>
+            <div class="ConC13">
+              <div class="ConC131">
+                <!--벼룩시장-->
+                    <div class="conA1221"><h6><a href="
+                      /posts/14/index_pic"><strong>벼룩시장</strong></a></h6></div>
+                    <div class="ConC1311">
+                      <% posts_14 = Post.where("category_id like ?","#{14}").reverse %>
+                      <% (0..1).each do |i|%>
+                        <div class="postlistB">
+                          <div class="postlistB1">
+                            <!--이미지 a 태그-->
+                            <% p = posts_14[i] %>
+                            <a href="/posts/show/<%=posts_14[i].id%>">
+                              <% unless p.content.include?("<img src=") %>
+                                <div class="panel-body show_content" style="width:100%;height:100%;overflow:hidden; padding:0; margin:0;">
+                                  <img class="card-img-top" src="/assets/basic.png" alt="Card image cap" style=" width:auto;height:100%;vertical-align:middle;">
+                                </div>
+                              <%else%>
+                               
+                                 <% require 'nokogiri' %>
+                                 <%doc = Nokogiri::HTML(p.content.to_s)%>
+                                 <%doc = doc.at_css("img")%>
+                                
+                                  <div class="panel-body show_content" style="width:100%;height:100%;overflow:hidden;"><%= doc.to_s.html_safe %></div>
+                               
+                              <% end %>
+                            </a>
+                          </div>
+                          <div class="postlistB2">
+                            <a href="/posts/show/<%= posts_14[i].id %>"><%= posts_14[i].title %></a>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                      
+              </div>
+              <div class="ConC132">
+                <!--쉐어하우스-->
+                    <div class="conA1221"><h6><a href="/posts/13/index_pic"><strong>쉐어하우스</strong></a></h6></div>
+                    <div class="ConC1311">
+                      <% posts_13 = Post.where("category_id like ?","#{13}").reverse %>
+                      <% (0..1).each do |i|%>
+                        <div class="postlistB">
+                          <div class="postlistB1">
+                            <!--이미지 a 태그-->
+                            <% p = posts_13[i] %>
+                            <a href="/posts/show/<%=posts_13[i].id%>">
+                              <% unless p.content.include?("<img src=") %>
+                                <div class="panel-body show_content" style="width:100%;height:100%;overflow:hidden;">
+                                  <img class="card-img-top" src="/assets/basic.png" alt="Card image cap" style="vertical-align:middle;">
+                                </div>
+                              <%else%>
+                               
+                                 <% require 'nokogiri' %>
+                                 <%doc = Nokogiri::HTML(p.content.to_s)%>
+                                 <%doc = doc.at_css("img")%>
+                                
+                                  <div class="panel-body show_content" style="width:100%;height:100%;overflow:hidden;"><%= doc.to_s.html_safe %></div>
+                               
+                              <% end %>
+                          </div>
+                          <div class="postlistB2">
+                            <a href="/posts/show/<%= posts_13[i].id %>"><%= posts_13[i].title %></a>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                      
+              </div>
+            </div>
+        </div>
+        <div class="ConC2">
+            <div class="ConC21">
+              <!--맛집정보(별점)-->
+              <div class="ConC211">
+                <h6><a href="/posts/34/index"><strong>맛집정보</strong></a></h6>
+                <% posts_34 = Post.where("category_id like ?","#{34}").reverse %>
+                <% (0..3).each do |i|%>
+                  <div class="postlistA">
+                    <div class="postlistAtext">
+                     <a href="/posts/show/<%= posts_34[i].id %>"><%= posts_34[i].title %></a><br>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="ConC22">
+              <!--광고-->
+              <h2 hidden>광고</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- conD -->
+    <section class="conD">
+        <div class="container">
+            <div class="conD1">
+              <!--여행지 추천-->
+              <div class="conA1221"><h6><a href="/posts/32/index"><strong>여행지 추천</strong></a></h6></div>
+              <div class="conA1222">
+                <% posts_32 = Post.where("category_id like ?","#{32}").reverse %>
+                <% (0..3).each do |i|%>
+                  <div class="postlistA"><a href="/posts/show/<%= posts_32[i].id %>"><%= posts_32[i].title %></a><br></div>
+                <% end %>
+              </div>
+              
+            </div>
+            <div class="conD2">
+              <!--영어스터디-->
+              <div class="conA1221"><h6><a href="/posts/42/index"><strong>영어 스터디</strong></a></h6></div>
+              <div class="conA1222">
+                <% posts_42 = Post.where("category_id like ?","#{42}").reverse %>
+                <% (0..3).each do |i|%>
+                  <div class="postlistA"><a href="/posts/show/<%= posts_42[i].id %>"><%= posts_42[i].title %></a><br></div>
+                <% end %>
+              </div>
+              
+            </div>
+            <div class="conD3">
+              <!--세일정보-->
+              <div class="conA1221"><h6><a href="/posts/15/index"><strong>세일정보</strong></a></h6></div>
+              <div class="conA1222">
+                <% posts_15 = Post.where("category_id like ?","#{15}").reverse %>
+                  <% (0..3).each do |i|%>
+                  <div class="postlistA"><a href="/posts/show/<%= posts_15[i].id %>"><%= posts_15[i].title %></a><br></div>
+                <% end %>
+              </div>  
+            </div>
+          </div>
+        </section>  
+              
+<%= render "footer" %>             

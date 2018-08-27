@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://use.fontawesome.com/3f4fc05178.js"></script>
+    
+    <style type="text/css">
+    body{
+        display:flex;
+        height:100vh;
+        justify-content:center;
+        align-items:center;
+        
+    }
+        i{
+            font-size:30px;
+        }
+        .icon-bg{
+            transition: transform 0.3s ease-in-out;
+        }
+        .icon-bg:hover{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background-color: #ddd;
+            width:45px;
+            height:45px;
+            border: 1px solid transparent;
+            border-radius:50%;
+            transform: scale(0.8);
+            
+        }
+        .icon-border{
+            transition: transform 0.5s ease-in-out;
+            /*width:57px;*/
+            /*height:57px;*/
+        }
+        .icon-border:hover{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            
+            background-color: transparent;
+            border: 3px solid #ddd;
+            border-radius:50%;
+            transform: scale(1.2);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="icon-border">
+        <div class="icon-bg">
+        <i class="fas fa-unlock-alt"></i>
+        </div>
+    </div>
+</body>
+</html>

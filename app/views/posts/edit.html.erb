@@ -1,0 +1,23 @@
+<%= render "navbar3" %>
+
+
+<div class="container">
+   <!--게시판 별로 이름 주기 -->
+    <%= render "categoryName" %>
+    
+    <form action="/posts/update/<%=@post.id%>" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">제목</label>
+        <input value="<%= @post.title %>" name="input_title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요.">
+      </div>
+      
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">내용</label>
+        <textarea name="input_content" class="tinymce" id="exampleFormControlTextarea1" rows="25" placeholder="내용을 입력하세요."><%=@post.content.html_safe%></textarea>
+        <%=tinymce %>
+      </div>
+      <button type="submit" class="btn btn-primary">제출</button>
+    </form>
+</div>
+
+<%= render "footer" %>

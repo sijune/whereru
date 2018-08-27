@@ -1,0 +1,135 @@
+<!--목록-->
+<div class="header">
+    <nav class="navbar navbar-expand-lg navbar-light" style="margin-top:80px; background-color:#03b1ef;">
+    	<button class="toggle"><span class="fa fa-bars"></span></button>
+
+	    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	      <div class="navbar-nav">
+	        <a class="nav-item nav-link" href="#" id="navA">생활정보</a>
+	        <a class="nav-item nav-link" href="#" id="navB">여행/맛집</a>
+	        <a class="nav-item nav-link" href="#" id="navC">모임/과외</a>
+	        <a class="nav-item nav-link" href="#" id="navD">구인구직</a>
+	        <a class="nav-item nav-link" href="#" id="navE">법률/상담</a>
+	      </div>
+	    </div>
+  	</nav>
+  	<div class="header-bar-body">
+    	<div class="header-bar bg-light">
+    	    <ul class="list">
+    	      <li><a href="/posts/1/index">자유게시판</a></li>
+    	      <li><a href="/posts/5/index">뉴스</a></li>
+    	      <li><a href="/posts/3/index">쉐어하우스</a></li>
+    	      <li><a href="/posts/4/index">벼룩시장</a></li>
+    	      <li><a href="/posts/8/index">세일정보</a></li>
+    	      <li>해외특송</li>
+    	      <li>생활꿀팁</li>
+    	      <li>달러거래</li>
+    	    </ul>
+    	    <ul class="list">
+    	      <li>같이가요</li>
+    	      <li><a href="/posts/6/index">여행지 추천</a></li>
+    	      <li>여행후기</li>
+    	      <li><a href="/posts/3/index">맛집</a></li>
+    	    </ul>
+    	    <ul class="list">
+    	      <li>소모임</li>
+    	      <li><a href="/posts/7/index">영어 스터디</a></li>
+    	      <li>과외</li>
+    	      <li>언어교환</li>
+    	    </ul>
+    	    <ul class="list">
+    	      <li><a href="/posts/2/index">구인</a></li>
+    	      <li><a href="/posts/9/index">구직</a></li>
+    	    </ul>
+    	    <ul class="list">
+    	      <li>텍스</li>
+    	      <li>연금</li>
+    	      <li>이민상담</li>
+    	      <li>유학상담</li>
+    	    </ul>
+    	</div>
+	</div>
+
+    <script type="text/javascript">
+    $(function(){
+      $('.navbar').mouseenter(function(){
+        $('.header-bar').show();
+      });
+      $('.header-bar').mouseleave(function(){
+        $('.header-bar').hide();
+      })
+    })
+    </script>
+
+    <!-- media-nav -->
+    <div class="sidenav">
+        <button class="dropdown-btn">생활
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="/posts/1/index">자유게시판</a>
+          <a href="#">뉴스</a>
+          <a href="#">쉐어하우스</a>
+          <a href="#">벼룩시장</a>
+          <a href="#">세일정보</a>
+          <a href="#">해외특송</a>
+          <a href="#">생활꿀팁</a>
+          <a href="#">달러거래</a>
+        </div>
+        
+        <button class="dropdown-btn">여행/맛집
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="#">같이가요</a>
+          <a href="#">여행지 추천</a>
+          <a href="#">여행후기</a>
+          <a href="#">맛집</a>
+        </div>
+        
+        <button class="dropdown-btn">모임/과외
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="#">소모임</a>
+          <a href="#">영어스터디</a>
+          <a href="#">과외</a>
+          <a href="#">언어교환</a>
+        </div>
+        
+        <button class="dropdown-btn">구인구직
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="#">구인</a>
+          <a href="#">구직</a>
+        </div>
+        
+        <button class="dropdown-btn">법률상담
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="#">텍스</a>
+          <a href="#">연금</a>
+          <a href="#">이민상담</a>
+          <a href="#">유학상담</a>
+        </div>
+    </div>
+      
+    <script>
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+      
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      }
+    </script>
+</div>

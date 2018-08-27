@@ -1,0 +1,27 @@
+	<%= bootstrap_form_for profile, url: path do |f| %>
+	<div>
+		<%= '이름' %> <!--f.label :name, -->
+		<%= f.text_field :name %>
+	</div>
+	<div>
+		<%= '주소' %>
+		<%= f.text_field :address %>
+	</div>
+	<div>
+		<%= '핸드폰' %>
+		<%= f.text_field :mobile %>
+	</div>
+	<div>
+		<%= '생년월일' %>
+		<%= f.date_field :birth%>
+	</div>
+	<div style="text-align: right;">
+		<% f.submit %>
+		<button type="submit" class="btn btn-primary">저장하기</button>
+	</div>
+<% end %>
+
+
+<style>
+
+</style>

@@ -1,0 +1,137 @@
+<div align=center>
+    <!--위에 색깔 줄-->
+    <table width="100%" align="center" cellpadding="0" cellspacing="0"  >
+        <tr>
+            <td width="100%" height="5" valign="bottom" title=#e55356 bgcolor="#0505aa" colspan="3" align="center">
+             
+            </td>
+        </tr>
+    </table>
+    <!--로고+검색창-->
+    <div align=center style="overflow:hidden;clear:both;width:100%;">
+    <div class="container" >
+        <!--로고-->
+        <div style="float:left;height:66px;" align=left>
+            <div id="logo">
+    		    <%= link_to image_tag("logo.png"), root_path %>
+    		    <p><span class="name multiple">WhereRU</span><span class="subname">싱가포르</span></p>
+	    	</div>
+        </div>
+        
+        <!--검색창-->
+        <div style="float:right;padding-top:8px"  class=nanum-g>
+            <div style="display:inline-block;padding-top:8px;margin:0;" class="doSearch">
+			  <form class="form-inline my-2 my-lg-0" action="/posts/search" method="get">
+			    <div class="form-group">
+			      <select name="cate" class="form-control" id="exampleFormControlSelect1">
+			        <option value="1">제목</option>
+			        <option value="2">내용</option>
+			        <option value="3">제목+내용</option>
+			        <option value="4">작성자</option>
+			      </select>
+			    </div>
+			    <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
+			  </form>
+		  </div>
+        </div>
+    </div>
+    </div>
+    
+<!--여기까지 네브바 1-->    
+
+
+
+<!--네브바2-->
+<div align=center style="width:100%;background-color:#e9ecef;background-repeat:repeat-x;">
+    <div class="topmenubox nanum-g" id="topmenubox" align=center style="border-top:1px solid #cecece;border-bottom:1px solid #cecece;">
+    <div class="popmenu07" id="topmenu07" align=center style="padding-top:10px;padding-bottom:12px;width:988px;display:inline-block;" >
+
+    <dl class="menusty02"  >
+    
+    <dd style="background-color:#fafafa;border-radius:0px;box-shadow:0 3px 0 0 rgba(0,0,0,0.05);border:1px solid #cecece;">
+        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">
+            <li class="forumtit01 daum" ><i class="fas fa-heart" style="color:#0505aa; font-weight: bold;"></i> 생활정보</li>
+    	      
+    	    <li><a href="/posts/11/index">자유게시판</a></li>
+    	    <li><a href="/posts/12/index">뉴스</a></li>
+    	    <li><a href="/posts/13/index">쉐어하우스</a></li>
+    	    <li><a href="/posts/14/index">벼룩시장</a></li>
+    	    <li><a href="/posts/15/index">세일정보</a></li>
+    	    <li><a href="/posts/16/index">해외특송</a></li>
+    	    <li><a href="/posts/17/index">생활꿀팁</a></li>
+        </ul>
+   
+
+        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">
+            <li class="forumtit01 daum" ><i class="fas fa-book-reader" style="color:#0505aa;"></i> 소소한 이야기</li>
+    	      
+    	    
+    	    <li><a href="/posts/21/index">연애이야기</a></li>
+    	    <li><a href="/posts/22/index">일상이야기</a></li>
+    	    <li><a href="/posts/23/index">익명이야기</a></li>
+    	    <li><a href="/posts/24/index">영어단어 퀴즈</a></li>
+    	    <li><a href="/posts/25/index">달러거래</a></li>
+    	    <li><a href="/posts/26/index">정치/사회 이야기</a></li>
+            
+        </ul>
+        
+
+        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">
+            <li class="forumtit01 daum" ><i class="fas fa-plane" style="color:#0505aa;"></i> 여행/맛집</li>
+    	      
+    	    <li><a href="/posts/31/index">같이가요</a></li>
+    	    <li><a href="/posts/32/index">여행지 추천</a></li>
+    	    <li><a href="/posts/33/index">여행후기</a></li>
+    	    <li><a href="/posts/34/index">맛집</a></li>
+            
+        </ul>
+        
+        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">
+            <li class="forumtit01 daum" ><i class="fas fa-comments" style="color:#0505aa;"></i> 모임/과외</li>
+    	      
+    	    <li><a href="/posts/41/index">소모임</a></li>
+    	    <li><a href="/posts/42/index">영어 스터디</a></li>
+    	    <li><a href="/posts/43/index">언어교환</a></li>
+    	    <li><a href="/posts/44/index">과외</a></li>
+    	    
+            
+        </ul>
+        
+        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">
+            <li class="forumtit01 daum" ><i class="fas fa-share-alt" style="color:#0505aa;"></i> 법률/상담</li>
+    	      
+    	    <li><a href="/posts/51/index">텍스</a></li>
+    	    <li><a href="/posts/52/index">연금</a></li>
+    	    <li><a href="/posts/53/index">이민상담</a></li>
+    	    <li><a href="/posts/54/index">유학상담</a></li>
+        </ul>
+        
+        <ul style="margin-top:12px;margin-bottom:8px;">
+            <li class="forumtit01 daum" ><i class="far fa-building" style="color:#0505aa;"></i> 구인구직</li>
+    	      
+    	    <li><a href="/posts/61/index">구인</a></li>
+    	    <li><a href="/posts/62/index">구직</a></li>
+    	    <br>
+    	    <li class="forumtit01 daum" style="border-top:1px solid #f2f2f2;"><i class="far fa-lightbulb" style="color:#0505aa;"></i> 요청</li>
+    	    <li><a href="/posts/62/index">게시판 개설</a></li>
+        </ul>
+
+    </dd>
+	</dl>
+	</div>
+    </div>
+    <script> 
+    var rr1 = Get_Cookie( "s_ONOFF" ); 
+    if( rr1 != 1  ) 
+    { 
+    document.getElementById("topmenubox").style.display = "block"; 
+    } 
+    </script>
+
+</div>
+
+
+
+
+<div id="left" style="width:32px;position:absolute;top:84px; z-index:0;right:50%;margin-right:490px;cursor:pointer;" onclick="OnOpenClose()"><i class="fas fa-sort"></i></div>

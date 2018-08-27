@@ -1,0 +1,8 @@
+<h2>User List</h2>
+<div class="panel-body">
+  <ul>
+    <% @users.each do |user| %>
+      <li><a href="/comments/new/<%=user.id%>"> <%=user.username%></a></li>
+    <% end %>
+  </ul>
+</div>

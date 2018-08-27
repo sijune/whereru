@@ -1,0 +1,170 @@
+<%= render "navbar3" %>
+
+<div class="container" >
+  <div class="wrapAll" style="display:flex;">
+    <!--왼쪽 인덱스-->
+    <div class="wrap" style="background-color:white; border-left: 2px #f8f9fa;padding:30px; box-shadow: 2px 2px 0px 2px #c3cad8;float:left;flex:5;">
+      <%= render "categoryName" %>
+      
+
+        
+      <div class="card_index">
+                  
+                    <% @posts.each do |p| %>
+                    
+                      <div class="card" style="width: 14rem;display:inline-block;margin-bottom:5px;">
+                        
+                        <a class="article" href="/posts/show/<%= p.id %>">
+                          <% unless p.content.include?("<img src=") %>
+                            <div class="panel-body show_content" style="text-align:center;max-height:150px;overflow:hidden;">
+                              <img class="card-img-top" src="/assets/basic.png" alt="Card image cap" style="width:150px;height:150px;vertical-align:middle;">
+                            </div>
+                          <%else%>
+                           
+                             <% require 'nokogiri' %>
+                             <%doc = Nokogiri::HTML(p.content.to_s)%>
+                             <%doc = doc.at_css("img")%>
+                            
+                              <div class="panel-body show_content" style="max-height:150px;overflow:hidden;"><%= doc.to_s.html_safe %></div>
+                           
+                          <% end %>
+                            
+                                                                  
+                            
+                            <div class="card-body">
+                              <h5 class="card-title" style="font-size:18px;overflow: hidden; max-height: 20px;"><%= p.title %></h5>
+                              <div style="position:relative;height: 60px;">
+                                <div style="position:absolute;">
+                                  <time class="small"><%= "#{time_ago_in_words(p.created_at)} 전" %></time>
+                                
+                                  <!--댓글 갯수 count-->
+                                  <% replySize = p.replies.size %>
+                                  <% a = (p.replies.size-1) %>
+                                  <% (0..a).each do |i| %>
+                                    <% replySize += p.replies[i].rereplies.size %>
+                                  <% end %>
+                                  <!--댓글 갯수 count 끝-->
+                                  
+                                  <% if @category == 23 %>
+                                        <h3 class="small"><i class="fa fa-user-o" aria-hidden="true"></i> 익명</h3>
+                                  <% else %>
+                                        <h3 class="small"><i class="fa fa-user-o" aria-hidden="true"></i> <%= p.user.username %></h3>
+                                  <% end %>
+                                </div>
+                                <div style="position:absolute;right: 30px;">
+                                  <ul class="status">
+                                    <li class="vote"><i class="far fa-thumbs-up" style="color:#0505aa"></i>  <%= p.likes.size - p.hates.size %> </li>
+                                    <li class="vote" style="color:#03b1ef"><i class="far fa-comment-dots" style="color:#03b1ef"></i> <%= replySize %> </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            
+                            </div>
+                        </a>
+                      </div>
+                      
+                    <% end %>
+                </div>
+        
+        <div class="page_position">
+          <%= paginate @posts%>
+        </div>
+    </div>
+   
+    <!--오른쪽 로그인 및 실시간 -->
+    <div class="conA31" style="float:left;margin-left:5%;flex:2;margin-top:25px;">
+       <div class="leftside">
+         <!--로그인-->
+        <div class="card pconly conA311" style=" padding:10px;">
+            <form class="logged">
+               <% if user_signed_in? %>
+                  <!--<img src="https://cf-fpi.everytime.kr/0.png" class="picture">-->
+                  <h5 class="nickname" style="padding-top:0px;"><%= current_user.username %> </h4>
+                  <a href="/users/sign_out"><button style="font-size:14px;" type="button" class="btn btn-outline-dark">로그아웃</button></a>
+                  <!--<p id="login_btn" class="username"><a id="login_btn" href="/users/sign_out" ><div class="conA3btn">로그아웃</div></a></p>-->
+              <% else %>
+                  <!--<p class="username"><a id="login_btn" href="/users/sign_in"><div class="conA3btn">로그인</div></a></p>-->
+                  <button type="button" class="btn btn-outline-dark">로그인</button>
+              <% end %>   
+            </form>
+        </div>
+        <div class="card">
+          <div class="menus">
+            <div class="menuS" style="padding-left:0;">
+              <a href="/my_profile" class="myarticle"><i class="fas fa-user" style="color: "></i>&nbsp;&nbsp; 프로필</a><br>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/comments/index" onClick="window.open(this.href, '', 'width=500, height=545'); return false;" class="mycommentarticle"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;&nbsp; 쪽지함</a>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/posts/00/index" class="myarticle"><i class="fas fa-list-ul" style="color: ;"></i>&nbsp;&nbsp; 내가 쓴 글</a><br>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/posts/myReply" class="mycommentarticle"><i class="far fa-comment" style="color: ;"></i>&nbsp;&nbsp; 나의 댓글</a>
+            </div>
+          </div>
+        </div>
+         
+         <!--실시간 인기글-->
+            <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;box-shadow: 2px 2px 0px 2px #c3cad8;">
+              <div class="postlistA" style="background-color:#62AEFF ;border-bottom:solid 1px #c5cbd0;">
+                <div class="postlistAtext" >
+                  <a href="/posts/hotPost" class="article" style="color:#f8f9fa;cursor:pointer; text-shadow: 0 0 3px black;"><i class="fas fa-fire" style="color:#00c9b7;"></i> &nbsp 실시간 인기글</a>
+                </div>
+              </div>
+              <% hotPosts = HotPost.all.reverse %>
+              <% (0..3).each do |i|%>
+                <% hotpost = Post.find(hotPosts[i].post_id) %> 
+                <%if i==4 %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 0px #c5cbd0;">
+                <% else %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 1px #c5cbd0;">
+                <% end %>
+                  <div class="postlistAtext" >
+                     <a class="article" href="/posts/show/<%=hotpost.id%>"><%= hotpost.title.truncate(15, omission: '...') %></a><br>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            
+        
+         <!--실시간 인기글-->
+            <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;box-shadow: 2px 2px 0px 2px #c3cad8;">
+              <div class="postlistA" style="background-color:#62AEFF ;border-bottom:solid 1px #c5cbd0;">
+                <div class="postlistAtext" >
+                  <a class="article" style="color:#f8f9fa;cursor:context-menu;text-shadow: 0 0 3px black;"><i class="fa fa-refresh" aria-hidden="true" ></i> &nbsp 실시간 글</a>
+                </div>
+              </div>
+              <% posts_realtime = Post.all.reverse %>
+              <% (0..4).each do |i|%>
+                <%if i==4 %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 0px #c5cbd0;">
+                <% else %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 1px #c5cbd0;">
+                <% end %>
+                  <div class="postlistAtext" >
+                     <a class="article" href="/posts/show/<%= posts_realtime[i].id %>"><%= posts_realtime[i].title.truncate(23, omission: '...') %></a><br>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        
+        
+      </div>
+    </div>
+    
+  </div>
+
+  
+</div>
+
+<%= render "footer" %>
+
+
+<style>
+
+body{
+  
+    background-color:#ebeef1;
+}
+</style>

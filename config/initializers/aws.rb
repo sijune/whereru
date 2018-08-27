@@ -1,0 +1,12 @@
+CarrierWave.configure do |config|
+  config.fog_provider = 'fog/aws'                        # required
+  config.fog_credentials = {
+    provider:              'AWS',                        # required
+    aws_access_key_id:     'AKIAI7FPT6TVE7CKGRKA',                        # required
+    aws_secret_access_key: '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',                        # required
+    region:                'ap-northeast-2',             # optional, defaults to 'us-east-1'
+    endpoint:              'https://s3.ap-northeast-2.amazonaws.com' # optional, defaults to nil
+  }
+  config.fog_directory  = 'sijunelee'            # required
+  config.fog_attributes = {} # optional, defaults to {}
+end

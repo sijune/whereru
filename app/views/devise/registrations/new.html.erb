@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>whereRu</title>
+</head>
+<style>
+    body{
+    margin:0;
+    height:100vh;
+    background: url("/assets/login_b0.jpg") no-repeat;
+    background-size:cover;
+    background-position:center;
+    /*background-image:linear-gradient(120deg, #4776e8, #62aeff 20%, #4776e8);*/
+    
+}
+.mycontainer{
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.mywrap{
+    width:42%;
+    height:550px;
+    margin-top:95px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display:flex;
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.6);
+}
+.intro_content{
+    flex:500px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.intro_content img{
+    flex:500px;
+    height:550px;
+    border-radius: 20px 0 0 20px;
+}
+.dots{
+  display:inline-block;
+  position:relative;
+  bottom:75px;
+  left:44%;
+  z-index:200px;
+}
+/* Hide the images by default */
+.mySlides {
+    display: none;
+    margin:0;
+    padding:0;
+    transform:translateY(1.9%);
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  z-index:100;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  animation-name: fade;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+.login{
+    flex:30%;
+    background-color:transparent;
+    border: 3px solid #fff;
+    border-radius: 5px 5px 5px 5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.login_form{
+    flex:1;
+}
+.login_form h2{
+    margin-left: 25px;
+    color:#fff;
+}
+form {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    padding:20px 30px 20px 100px;
+}
+p{
+    margin:0;
+}
+label {
+  user-select: none;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  font-size: 14px;
+  color:#fff;
+}
+
+.sign_input {
+	width: 80%;
+	border: 3px solid #fff;
+	margin: 1rem 1rem 0 1rem;
+	padding: 0.7em ;
+	border-radius: 15px;
+	color:#fff;
+	background-color:#489CF2 !important;
+}
+.sign_btn_input {
+	width: 30%;
+	border: 1px solid transparent;
+	margin-left: 27%;
+	margin-bottom: 1rem;
+	padding: 0.3rem 0;
+	border-radius: 15px;
+	color:#489CF2;
+  font-size:25px;
+  font-weight:bold;
+	background-color:#fff !important;
+	cursor:pointer;
+}
+.remember_p{
+    margin-left:53%;
+    margin-top:10px;
+    margin-bottom:20px;
+    transform:translateX(-50%);
+}
+.remember{
+    color:#fff;
+}
+
+
+#keep_signed_in {
+  width: auto;
+  margin-right: 3px;
+}
+#keep_signed_in + label {
+	display: inline-block;
+}
+
+
+input:focus {
+  outline: none;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+input::placeholder {
+  color: #d9d9d9;
+}
+
+input:focus::placeholder {
+  color: #fff;
+}
+
+.post{
+    flex:1;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding:20px 50px;
+}
+.search{
+    width: 90%;
+	border: none;
+	padding: 1em ;
+	border-radius: 10px;
+	background: rgba(0,0,0,0.3);
+	color:#fff;
+}
+
+/*@media (max-width:767px){*/
+/*    .intro .mycontainer{*/
+/*        height:100vh;*/
+/*        box-sizing: border-box;*/
+/*    }*/
+/*    .map{*/
+/*        height:60%;*/
+/*    }*/
+/*    .login{*/
+/*        height:40%;*/
+/*    }*/
+/*}*/
+/*@media (min-width:768px){*/
+/*    .intro .mycontainer{*/
+/*        display: flex;*/
+/*        background:url("/assets/background.jpg") no-repeat;*/
+/*        background-size: cover;*/
+/*        background-clip: border-box;*/
+/*        height:100vh;*/
+/*        box-sizing: border-box;*/
+/*    }*/
+/*    .map{*/
+/*        flex:5;*/
+/*        background: linear-gradient(180deg, rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.1));*/
+/*    }*/
+/*    .login{*/
+/*        flex:2;*/
+/*    }*/
+/*}*/
+</style>
+<body>
+    <section class="intro">
+        <div class="mycontainer">
+            <div class="mywrap">
+                
+                <div class="login">
+                    <div class="login_form">
+                              <div class="panel panel-default devise-bs">
+                                
+                                <div>
+                                  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form' }) do |f| %>
+                                     <h2>Sign Up</h2>
+                                     <div class="form-group">
+                                      <%= f.text_field :username, autofocus: true, class: 'sign_input',placeholder: "username" %>
+                                    </div>
+                                    <div class="form-group">
+                                      <%= f.email_field :email, autofocus: true, class: 'sign_input',placeholder: "email" %>
+                                    </div>
+                                    <div class="form-group">
+                                      <%= f.password_field :password, class: 'sign_input',placeholder: "password" %>
+                                    </div>
+                                    <div class="form-group">
+                                      <%= f.password_field :password_confirmation, class: 'sign_input',placeholder: "password_confirmation" %>
+                                    </div>
+                                    <%= f.submit t('.sign_up', default: 'Sign up'), class: 'sign_btn_input' %>
+                                  <% end %>
+                                </div>
+                              </div>
+                              <!--<#%= render 'devise/shared/links' %>-->
+                        
+                    </div>
+                </div>
+                
+            </div>
+            -----
+            
+        </div>
+    </section>
+    
+    <script>
+       var slideIndex = 1;
+        showSlides(slideIndex);
+        
+        // Next/previous controls
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+        
+        // Thumbnail image controls
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {slideIndex = 1} 
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none"; 
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block"; 
+          dots[slideIndex-1].className += " active";
+        }
+   </script>
+   
+  </body>
+ </html>

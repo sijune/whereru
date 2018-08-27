@@ -1,0 +1,211 @@
+<%= render "posts/navbar3" %>
+
+<div class="container" >
+  <div class="wrapAll" style="display:flex;">
+    <!--왼쪽 인덱스-->
+    <div class="wrap" style="background-color:white; border-left: 2px #f8f9fa;padding:30px; box-shadow: 2px 2px 0px 2px #c3cad8;float:left;flex:5;">
+      <%= render "posts/categoryName" %>
+      <section  style="margin-top:10px; padding-bottom: 3%; padding-top: 3%;">
+    <div class="container container2">
+        
+    <div class="profile_card">
+        <div style="padding-left: 3%; padding-top: 3%; padding-bottom: 1.5%;border-bottom: 3px solid lightgray;">
+            <p><a id="profile_title" href="/my_profile">프로필 정보</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="profile_title" href="<%= edit_profile_path %>">프로필 변경</a></p>
+        </div>
+        <div class="profile_content" style="border-bottom: 1px solid #D3D2D3;">
+            <p>이름&nbsp;&nbsp;&nbsp;<%= @profile.name%></p>
+        </div>
+
+        <div class="profile_content" style="border-bottom: 1px solid #D3D2D3;">
+            <p>주소&nbsp;&nbsp;&nbsp;<%= @profile.address%></p>
+        </div>
+        <div class="profile_content" style="border-bottom: 1px solid #D3D2D3;">
+            <p>전화번호&nbsp;&nbsp;&nbsp;<%= @profile.mobile%></p>
+        </div>
+        <div class="profile_content" style="border-bottom: 1px solid #D3D2D3;">
+            <p>이메일&nbsp;&nbsp;&nbsp;<%= current_user.email %></p>
+        </div>
+        <div class="profile_content">
+             <p>생년월일&nbsp;&nbsp;&nbsp;<%= @profile.birth%></p>
+        </div>
+        
+    </div>
+    
+
+    
+</div>
+</section>
+    </div>
+
+   
+    <!--오른쪽 로그인 및 실시간 -->
+    <div class="conA31" style="float:left;margin-left:5%;flex:2;margin-top:25px;">
+       <div class="leftside">
+         <!--로그인-->
+        <!-- <div class="profile_side">-->
+            <!--<div class="profile_title"><b>내 정보</b></div>-->
+        <!--    <div class="profile_menu">-->
+        <!--        <div class="profile_menus" style=" color: #415BA3; background-color: #F8F7F8;"><b>프로필 정보</b></div>-->
+        <!--        <a href="<%#= edit_profile_path %>"><div class="profile_menus"><b>프로필 변경</b></div></a>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="card pconly conA311" style=" padding:10px;">
+            <form class="logged">
+               <% if user_signed_in? %>
+                  <!--<img src="https://cf-fpi.everytime.kr/0.png" class="picture">-->
+                  <h5 class="nickname" style="padding-top:0px;"><%= current_user.username %> </h4>
+                  <a href="/users/sign_out"><button style="font-size:14px;" type="button" class="btn btn-outline-dark">로그아웃</button></a>
+                  <!--<p id="login_btn" class="username"><a id="login_btn" href="/users/sign_out" ><div class="conA3btn">로그아웃</div></a></p>-->
+              <% else %>
+                  <!--<p class="username"><a id="login_btn" href="/users/sign_in"><div class="conA3btn">로그인</div></a></p>-->
+                  <button type="button" class="btn btn-outline-dark">로그인</button>
+              <% end %>   
+            </form>
+        </div>
+        <div class="card">
+          <div class="menus">
+            <div class="menuS" style="padding-left:0;">
+              <a href="/my_profile" class="myarticle"><i class="fas fa-user" style="color: "></i>&nbsp;&nbsp; 프로필</a><br>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/comments/index" onClick="window.open(this.href, '', 'width=500, height=545'); return false;" class="mycommentarticle"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;&nbsp; 쪽지함</a>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/posts/00/index" class="myarticle"><i class="fas fa-list-ul" style="color: ;"></i>&nbsp;&nbsp; 내가 쓴 글</a><br>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/posts/myReply" class="mycommentarticle"><i class="far fa-comment" style="color: ;"></i>&nbsp;&nbsp; 나의 댓글</a>
+            </div>
+          </div>
+        </div>
+         
+         <!--실시간 인기글-->
+            <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;box-shadow: 2px 2px 0px 2px #c3cad8;">
+              <div class="postlistA" style="background-color:#62AEFF ;border-bottom:solid 1px #c5cbd0;">
+                <div class="postlistAtext" >
+                  <a href="/posts/hotPost" class="article" style="color:#f8f9fa;cursor:pointer; text-shadow: 0 0 3px black;"><i class="fas fa-fire" style="color:#00c9b7;"></i> &nbsp 실시간 인기글</a>
+                </div>
+              </div>
+              <% hotPosts = HotPost.all.reverse %>
+              <% (0..3).each do |i|%>
+                <% hotpost = Post.find(hotPosts[i].post_id) %> 
+                <%if i==4 %>
+                  <div id="realtimeList"  class="postlistA" style="background-color:white;border-bottom:solid 0px #c5cbd0;">
+                <% else %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 1px #c5cbd0;">
+                <% end %>
+                  <div class="postlistAtext" >
+                     <a class="article" href="/posts/show/<%=hotpost.id%>"><%= hotpost.title.truncate(15, omission: '...') %></a><br>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            
+        
+         <!--실시간 인기글-->
+            <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;box-shadow: 2px 2px 0px 2px #c3cad8;">
+              <div class="postlistA" style="background-color:#62AEFF ;border-bottom:solid 1px #c5cbd0;">
+                <div class="postlistAtext" >
+                  <a class="article" style="color:#f8f9fa;cursor:context-menu;text-shadow: 0 0 3px black;"><i class="fa fa-refresh" aria-hidden="true" ></i> &nbsp 실시간 글</a>
+                </div>
+              </div>
+              <% posts_realtime = Post.all.reverse %>
+              <% (0..4).each do |i|%>
+                <%if i==4 %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 0px #c5cbd0;">
+                <% else %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 1px #c5cbd0;">
+                <% end %>
+                  <div class="postlistAtext" >
+                     <a class="article" href="/posts/show/<%= posts_realtime[i].id %>"><%= posts_realtime[i].title.truncate(23, omission: '...') %></a><br>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        
+        
+      </div>
+    </div>
+    
+  </div>
+
+  
+</div>
+
+
+<style>
+
+body{
+    background-color:#ebeef1;
+}
+</style>
+
+<%= render "posts/footer" %> 
+
+<style>
+/*body{*/
+/*	background-color: #F8F7F8;*/
+/*	margin:0;*/
+/*}*/
+.container2{
+    max-width : 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    text-align:left;
+}
+.profile_side{
+        margin-left: 3%;
+    flex:1;
+}
+.profile_title{
+    margin-bottom: 5px;
+    background-color: #FFFFFF;
+    border: 1px solid lightgray;
+    height: 30%;
+    max-height: 61.03px;
+    width: 100%;
+    max-width: 310.38px;
+    padding-left: 8%;
+    padding-top: 8%;
+    padding-bottom: 10%;
+
+    font-size: 17px;
+}
+.profile_menu{
+    height: 60%;
+    max-height: 130px;
+    width: 100%;
+    max-width: 310.38px;
+    background-color: #FFFFFF;
+    border: 1px solid lightgray;
+}
+.profile_menus{
+    padding-left: 8%;
+    padding-top: 8%;
+    padding-bottom: 10%;
+    height: 49.5%;
+    width: 100%;
+    background-color: #FFFFFF;
+    color: lightgray;
+}
+.profile_menus:hover{
+    color: #415BA3;
+    background-color: #F8F7F8;
+}
+
+.profile_card{
+    flex: 3;
+    max-width:815.52px;
+	background-color: #FFFFFF;
+	border: 0.5px solid lightgray;
+}
+.profile_content{
+    padding-left: 5%;
+    padding-top: 4%;
+    padding-bottom: 2%;
+}
+#profile_title:hover{
+    font-weight:700;
+}
+</style>

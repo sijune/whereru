@@ -1,0 +1,470 @@
+<%=render "navbar3"%>
+<section class="main_container" >
+    <div class="container">
+        
+        <div class="contA">
+    	    <div class="contA1">
+    	        <article class="contA11">
+    	            <div class="headline">
+                    	<!--<img src="/assets/p01.png">-->
+                    	 <div class="photo" style="background-image:url(/assets/p00.png);"></div>
+                		<!--<div class="text1">-->
+                		<!--	<h2 id="country_name">여기는<br>싱가포르<br>입니다.</h2>-->
+                		<!--</div>-->
+                		<div class="headline_search">
+                		    <form class="form-row" action="/posts/search" method="get">
+                		       <div class="col-12" style="display:flex;">
+                    			    <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search" style="margin-right:15px;">
+                    			    <button class="btn btn btn-warning my-2 my-sm-0" type="submit" style="color:#fff;font-family:BMJUA">검색</button>
+                    			 </div>
+                			    
+                			   
+                			 </form>
+                		</div>
+            	
+            	    </div>
+            	</article>
+            
+            	
+            	<article class="contA12" style="background:url(/assets/pg03.jpg) no-repeat center;">
+            	<a href="/posts/11/index" class="boxA">
+              		<div class="text">
+              			<h4>자유게시판</h4>
+              		</div>
+              	
+              		<div class="photo_hover1">
+              		 <% posts_11 = Post.where("category_id like ?","#{11}").reverse %>
+              		 <% (0..3).each do |i|%>
+                	   <p><%= posts_11[i].title %></p>
+                	 <%end%>
+                	</div>
+            	</a>
+            	</article>
+            	
+            	
+            </div>
+            
+            <div class="contA2">
+            	
+            	<article class="contA21" style="background:url(/assets/p03.png) no-repeat center;">
+            	<a href="/posts/14/index_pic" class="boxA">
+              		<div class="text">
+              			<h4>벼룩시장</h4>
+              		</div>
+              	
+              		<div class="photo_hover2">
+              		 <% posts_14 = Post.where("category_id like ?","#{14}").reverse %>
+              		 <% (0..3).each do |i|%>
+                	   <p><%= posts_14[i].title %></p>
+                	 <%end%>
+                	</div>
+            	</a>
+            	</article>
+            
+            	<article class="contA22" style="background:url(/assets/p04.png) no-repeat center;">
+            	<a href="/posts/13/index_pic" class="boxA">
+            		<div class="text">
+            			<h4>쉐어하우스</h4>
+            		</div>
+            		<div class="photo_hover2">
+                	 <% posts_13 = Post.where("category_id like ?","#{13}").reverse %>
+              		 <% (0..3).each do |i|%>
+                	   <p><%= posts_13[i].title %></p>
+                	 <%end%>
+                </div>
+            	</a>
+            	</article>
+            
+            	<article class="contA23">
+            <div class="headline_board">
+            	     <!--실시간 인기글-->
+            	     <div class="sub_title">
+          	         <a href="/posts/hotPost"><h3>실시간 인기글</h3></a>
+          	       </div>
+            	     <div>
+            	       <% hotPosts = HotPost.all.reverse %>
+                     <% (0..4).each do |i|%>
+                     <% hotpost = Post.find(hotPosts[i].post_id) %> 
+                        <div class="postlistA">
+                          <div class="postlistAtext">
+                             <a class="headline_board_content" href="/posts/show/<%=hotpost.id%>">>
+                                 <%= hotpost.title.truncate(30, omission: '...') %>
+                                 <span style="float:right;"><%= "#{time_ago_in_words(hotpost.created_at)} 전" %></span>
+                                 
+                            </a><br>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                    
+                    
+            	    </div>
+            	</article>
+            </div>
+
+        </div>
+        <div class="contB">
+          
+            <div class="contB1">
+              <!--시간-->
+              <div class="title_now">
+                <h4>싱가폴은 지금</h4>
+              
+               
+              </div>
+            </div>
+            
+            <div class="contB2">
+              
+              <!--시간-->
+              <div class="time_now">
+                <img src="/assets/time.png" alt="time"/>
+                <h4 id="time_now">
+        
+                      <script>
+                        var myVar = setInterval(myTimer, 1000);
+                      
+                        function myTimer() {
+                          var d = new Date();
+                          var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+                          var nd = new Date(utc + (3600000 * 8));
+                          document.getElementById("time_now").innerHTML = nd.toLocaleTimeString();
+                        }
+                      </script>
+                  
+                 </h4>
+              </div>
+            </div>
+            
+            <div class="contB3">
+              <!--날씨-->
+              <div class="weather">
+                <% require 'open-uri'%>
+                <% require 'nokogiri'%>
+                
+                <%doc = Nokogiri::HTML(open("http://api.openweathermap.org/data/2.5/weather?q=Sydney&APPID=f7538a75367b9b9f43e4fdc306c4a5ab"))%>
+                <%doc = eval(doc.css("p").inner_text)[:weather][0][:icon]%>
+                
+               
+                <%if doc == 'clear sky'%>
+                  <img src="/assets/sunny.png" alt="clear sky"/>
+                <%elsif doc == 'few clouds'%>
+                  <img src="/assets/few_clouds.png" alt="few clouds"/>
+                <%elsif doc=='scattered clouds'%>
+                  <img src="/assets/cloud.png" alt="scattered clouds"/>
+                <%elsif doc== 'broken clouds'%>
+                  <img src="/assets/cloud.png" alt="broken clouds"/>
+                <%elsif doc =='shower rain' %>
+                  <img src="/assets/rain.png" alt="shower rain"/>
+                <%elsif doc == 'rain'%>
+                  <img src="/assets/rain.png" alt="rain"/>
+                <%elsif doc == 'thunderstorm'%>
+                  <img src="/assets/light.png" alt="thunderstorm"/>
+                <%elsif doc == 'snow'%>
+                  <img src="/assets/snowflake.png" alt="snow"/>
+                <%elsif doc ='mist'%>
+                  <img src="/assets/fogg.png" alt="mist"/>
+                
+                <%end%>
+                <h4>(
+                <%doc = Nokogiri::HTML(open("http://api.openweathermap.org/data/2.5/weather?q=Seoul&APPID=f7538a75367b9b9f43e4fdc306c4a5ab"))%>
+                <%temp = eval(doc.css("p").inner_text)[:main][:temp]%>
+                <%=(temp/10).to_i%>
+                ºC)
+                </h4>
+              </div>
+            </div>
+            
+            <div class="contB4">
+              <!--환율-->
+              <div class="exchange">
+                <img src="/assets/money.png" alt="money"/>
+                <%require 'eu_central_bank'%>
+                <% bank = EuCentralBank.new %>
+                <% bank.update_rates%>
+                <%rate = bank.exchange(100, "SGD", "KRW")%>
+                <h4><%= rate%>원<span style="color:#999">(SGD)</span></h4>
+              </div>
+            </div>
+            
+            <div class="contB5">
+              <!--검색어-->  
+                 
+              <div id="content">
+                <dl id="rank-list">
+                  <dd>
+                    <ol>
+                      <% (1..10).each do |i|%>
+                      <% keyword_10 = Keyword.order("value DESC")%>
+                      <li>
+                        <a href="#">
+                          <%= i %>. 
+                           <% if  i != 10 %> 
+                              <%= keyword_10[i-1].content %></br> 
+                            <% else %> 
+                              <%= keyword_10[i].content %></br>
+                            <% end %>
+                        </a>
+                      </li>
+                      <% end %>
+                    </ol>
+                  </dd>
+                </dl>
+              </div>
+
+
+
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+              <script>
+                $(function () {
+                  var count = $('#rank-list li').length;
+                  var height = $('#rank-list li').height();
+              
+                  function step(index) {
+                    $('#rank-list ol').delay(2000).animate({
+                      top: -height * index,
+                    }, 500, function () {
+                      step((index + 1) % count);
+                    });
+                  }
+              
+                  step(1);
+                });
+              </script>
+
+
+                
+              <!--검색어 나열-->
+                  <div class="search_array" style="display:none;">
+                    <% (1..10).each do |i|%>
+                    <% keyword_10 = Keyword.order("value DESC")%>
+                        <div class="search_list" style="font-size:12.5px; display:flex; padding:5px 0; ">
+                            <div class="search_num" style="color:#007bff; flex:1;"><%= i %></div> 
+                                <% if  i != 10 %> 
+                                  <div class="search_num" style="text-align:left; flex:1;"><%= keyword_10[i-1].content %></div></br> 
+                                <% else %> 
+                                  <div class="search_num" style="text-align:left; flex:1;"><%= keyword_10[i].content %></div></br>
+                                <% end %>
+                        </div>
+                    <% end %>
+                  </div>
+                  <script>
+                    $(function(){
+                        $('#content').mouseenter(function(){
+                          $('.search_array').show();
+                        });
+                        $('#content').mouseleave(function(){
+                          $('.search_array').hide();
+                        })
+                      });
+                  </script>
+                  
+            </div>
+        </div>
+        
+        <div class="contC">
+            <div class="contC1">
+                <article class="contC22">
+  	            <div class="headline_board">
+          	     <!--익명게시판-->
+          	     <div class="sub_title">
+          	       <a href="/posts/23/index"><h3>익명이야기</h3></a>
+          	     </div>
+                    <% posts_23 = Post.where("category_id like ?","#{23}").reverse %>
+                    <div class="listB">
+                      <% (0..4).each do |i|%>
+                        <div class="postlistB">
+                          <a class="headline_board_content" href="/posts/show//<%= posts_23[i].id %>">
+                            <%= posts_23[i].title %>
+                            <span style="float:right;"><%= "#{time_ago_in_words( posts_23[i].created_at)} 전" %></span>
+                            </a><br>
+                        </div>
+                      <% end %>
+                    </div>
+          	    </div>
+            	</article>
+            
+            	<article class="contC12" style="background:url(/assets/p05.png) no-repeat center;">
+            	<a href="/post/32/index" class="boxA">
+            		<div class="text">
+            			<h4>여행지 추천</h4>
+            		</div>
+            		<div class="photo_hover3">
+                	 <% posts_32 = Post.where("category_id like ?","#{32}").reverse %>
+              		 <% (0..3).each do |i|%>
+                	   <p><%= posts_32[i].title %></p>
+                	 <%end%>
+                </div>
+            	</a>
+            	</article>
+            	<article class="contC13" style="background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(/assets/p01.png);">
+            	<div class="headline">
+              		<div class="text2">
+              			<h4 >Welcome</h4>
+              			<h4 >Singapore</h4>
+              		</div>
+            	</div>
+            	</article>
+            </div>
+            <div class="contC2">
+                <article class="contC21" style="background:url(/assets/pg02.jpg) no-repeat center; background-clip:content-box;">
+            	<a href="/post/34/index" class="boxA">
+            		<div class="text">
+            			<h4>맛집 추천</h4>
+            			</div>
+            		  <div class="photo_hover3">
+                	 <% posts_34 = Post.where("category_id like ?","#{34}").reverse %>
+              		 <% (0..3).each do |i|%>
+                	   <p><%= posts_34[i].title %></p>
+                	 <%end%>   
+                </div>
+            		
+            	</a>
+            	</article>
+            	
+              <article class="contC22">
+  	            <div class="headline_board">
+          	     <!--구인-->
+          	     <div class="sub_title">
+          	         <a href="/posts/61/index"><h3>구인</h3></a>
+          	     </div>
+                    <% posts_61 = Post.where("category_id like ?","#{61}").reverse %>
+                    <div class="listB">
+                      <% (0..4).each do |i|%>
+                        <div class="postlistB">
+                          <a class="headline_board_content" href="/posts/show//<%= posts_61[i].id %>">
+                            <%= posts_61[i].title %>
+                            <span style="float:right;"><%= "#{time_ago_in_words( posts_61[i].created_at)} 전" %></span>
+                            </a><br>
+                        </div>
+                      <% end %>
+                    </div>
+          	    </div>
+            	</article>
+            	
+            	<article class="contC23">
+  	            <div class="headline_board">
+          	     <!--구직-->
+          	     <div class="sub_title">
+          	         <a href="/posts/62/index"><h3>구직</h3></a>
+          	     </div>
+                    <% posts_62 = Post.where("category_id like ?","#{62}").reverse %>
+                    <div class="listB">
+                      <% (0..4).each do |i|%>
+                        <div class="postlistB">
+                          <a class="headline_board_content" href="/posts/show//<%= posts_62[i].id %>">
+                            <%= posts_62[i].title %>
+                            <span style="float:right;"><%= "#{time_ago_in_words( posts_62[i].created_at)} 전" %></span>
+                            </a><br>
+                        </div>
+                      <% end %>
+                    </div>
+          	    </div>
+            	</article>
+          
+            </div>
+        </div>
+        <div class="contD">
+            
+            		<img src="/assets/ad.png" alt="ad" style="width:100%;"/>
+            	
+        </div>
+        <div class="contE">
+          <div class="contE1">
+         
+              <article class="contE11">
+  	            <div class="headline_board">
+          	     <!--영어스터디-->
+          	       <div class="sub_title">
+          	         <a href="/posts/42/index"><h3>영어스터디</h3></a>
+          	       </div>
+                    <% posts_42 = Post.where("category_id like ?","#{42}").reverse %>
+                    <div class="listB">
+                      <% (0..4).each do |i|%>
+                        <div class="postlistB">
+                          <a class="headline_board_content" href="/posts/show/<%= posts_42[i].id %>">
+                            <%= posts_42[i].title %>
+                            <span style="float:right;"><%= "#{time_ago_in_words(posts_42[i].created_at)} 전" %></span>
+                            </a><br>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+          	    
+            	</article>
+            
+              <article class="contE12">
+  	            <div class="headline_board">
+          	     <!--세일 정보-->
+          	     <div class="sub_title">
+          	         <a href="/posts/15/index"><h3>세일 정보</h3></a>
+          	     </div>
+                    <% posts_15 = Post.where("category_id like ?","#{15}").reverse %>
+                    <div class="listB">
+                      <% (0..4).each do |i|%>
+                        <div class="postlistB">
+                          <a class="headline_board_content" href="/posts/show//<%= posts_15[i].id %>">
+                            <%= posts_15[i].title %>
+                            <span style="float:right;"><%= "#{time_ago_in_words( posts_15[i].created_at)} 전" %></span>
+                            </a><br>
+                        </div>
+                      <% end %>
+                    </div>
+          	    </div>
+            	</article>
+            
+              <article class="contE13">
+  	            <div class="headline_board">
+          	     <!--세일 정보-->
+          	     <div class="sub_title">
+          	         <a href="/posts/21/index"><h3>연애 이야기</h3></a>
+          	     </div>
+                    <% posts_21 = Post.where("category_id like ?","#{21}").reverse %>
+                    <div class="listB">
+                      <% (0..4).each do |i|%>
+                        <div class="postlistB">
+                          <a class="headline_board_content" href="/posts/show//<%= posts_21[i].id %>">
+                            <%= posts_21[i].title %>
+                            <span style="float:right;"><%= "#{time_ago_in_words( posts_21[i].created_at)} 전" %></span>
+                            </a><br>
+                        </div>
+                      <% end %>
+                    </div>
+          	    </div>
+            	</article>
+            	
+               <article class="contE14">
+  	            <div class="headline_board">
+          	     <!--세일 정보-->
+          	     <div class="sub_title">
+          	         <a href="/posts/31/index"><h3>같이가요</h3></a>
+          	     </div>
+                    <% posts_31 = Post.where("category_id like ?","#{31}").reverse %>
+                    <div class="listB">
+                      <% (0..4).each do |i|%>
+                        <div class="postlistB">
+                          <a class="headline_board_content" href="/posts/show//<%= posts_31[i].id %>">
+                            <%= posts_31[i].title %>
+                            <span style="float:right;"><%= "#{time_ago_in_words( posts_31[i].created_at)} 전" %></span>
+                            </a><br>
+                        </div>
+                      <% end %>
+                    </div>
+          	    </div>
+            	</article>
+          </div>
+          
+        </div>
+    </div>
+</section>
+<%=render "footer"%>
+
+
+<style>
+  @font-face { font-family: 'KBIZHanmaumGothic'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KBIZHanmaumGothic.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+.main_container{
+  font-family:"KBIZHanmaumGothic";
+}
+</style>
+

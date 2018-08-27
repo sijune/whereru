@@ -1,0 +1,258 @@
+<%= render "navbar3" %>
+
+<div class="container" >
+  <div class="wrapAll" style="display:flex;">
+    <!--왼쪽 인덱스-->
+    <div class="wrap" style="background-color:white; border-left: 2px #f8f9fa;padding:30px; box-shadow: 2px 2px 0px 2px #c3cad8;float:left;flex:5;">
+      <%= render "categoryName" %>
+      
+      <% i= Post.where("category_id like ?", "#{@category}").count+1 %>
+        
+        <!--페이지가 2 이상 넘어가면 숫자를 맞춰주기 위해 page수 * 10 만큼 빼주기-->
+        <% if @page >=2 %>
+          <% i -= (@page-1) *10 %>
+        <% end %>
+        
+      <!--#시준 조회수 구현 -->  
+        <% @reply.each do |r| %>
+        <% if r.instance_of?(Reply) %>
+            <% p = Post.find(r.post_id) %>
+        <% else %>
+            <% p = Post.find(r.post_jd) %>
+        <% end %>
+        
+        <article>
+          <a class="article" href="/posts/show/<%= p.id %>">
+           
+            <h2 class="medium">
+            <!--생활정보-->
+            <span style="color:#4776E8 ; font-weight:700">
+            <%if p.category_id == 11 %>
+                [자유게시판]
+        
+            <%elsif p.category_id == 12 %>
+                [뉴스]
+          
+            <%elsif p.category_id == 13 %>
+                [쉐어하우스]
+                
+            <%elsif p.category_id == 14 %>
+                [벼룩시장]
+            
+            <%elsif p.category_id == 15 %>
+                [세일정보]
+            
+            <%elsif p.category_id == 16 %>
+                [해외특송]
+            
+            <%elsif p.category_id == 17 %>
+                [생활꿀팁]
+            
+            <!--소소한이야기-->
+            <%elsif p.category_id == 21 %>
+                [연애이야기]
+          
+            <%elsif p.category_id == 22 %>
+                [일상이야기]
+                
+            <%elsif p.category_id == 23 %>
+                [익명이야기]
+            
+            <%elsif p.category_id == 24 %>
+                [영어단어 퀴즈]
+            
+            <%elsif p.category_id == 25 %>
+                [달러거래]
+            
+            <%elsif p.category_id == 26 %>
+                [정치/사회]
+                
+            <!--여행/맛집-->
+            <%elsif p.category_id == 31 %>
+                [같이가요]
+                
+            <%elsif p.category_id == 32 %>
+                [여행지 추천]
+            
+            <%elsif p.category_id == 33 %>
+                [여행후기]
+            
+            <%elsif p.category_id == 34 %>
+                [맛집]
+            
+            <!--모임/과외-->
+            <%elsif p.category_id == 41 %>
+                [소모임]
+                
+            <%elsif p.category_id == 42 %>
+                [영어 스터디]
+            
+            <%elsif p.category_id == 43 %>
+                [언어교환]
+            
+            <%elsif p.category_id == 44 %>
+                [과외]
+            
+            <!--법률/상담-->
+            <%elsif p.category_id == 51 %>
+                [텍스]
+                
+            <%elsif p.category_id == 52 %>
+                [연금]
+            
+            <%elsif p.category_id == 53 %>
+                [이민상담]
+            
+            <%elsif p.category_id == 54 %>
+                [유학상담]
+            
+            <!--구인/구직-->
+            <%elsif p.category_id == 61 %>
+                [구인]
+                
+            <%elsif p.category_id == 62 %>
+                [구직]
+                
+            <%elsif p.category_id == 63 %>
+                [게시판 개설 요청]
+            
+            <% end %>
+            </span>
+           <%= p.title %>
+              <!--이미지가 있다면 아이콘 걸기!-->
+              <% if p.content.include?("<img src=") %> <i class="fas fa-image"></i> <% end %>
+          
+          <% if r.instance_of?(Reply) %>
+              <span style="font-size:12px;color:#9c9c9c;">에 달린 댓글</span></h2> 
+          <% else %>
+              <span style="font-size:12px;color:#9c9c9c;">에 달린 답글</span></h2>
+          <% end %>
+            
+            <p>  <%= r.content %> </p>
+            <!--댓글 갯수 count-->
+            <% replySize = p.replies.size %>
+            <% a = (p.replies.size-1) %>
+            <% (0..a).each do |i| %>
+              <% replySize += p.replies[i].rereplies.size %>
+            <% end %>
+            <!--댓글 갯수 count 끝-->
+            <time class="small"><%= "#{time_ago_in_words(p.created_at)} 전" %></time>
+            <% if @category == 23 %>
+                  <h3 class="small"><i class="fa fa-user-o" aria-hidden="true"></i> 익명</h3>  &nbsp;&nbsp;<span style="color:#ff9b9b;font-size:15px;"><% if r.hot == 1 %> <i class="fab fa-hotjar"> Hot</i> <% end %></span>
+            <% else %>
+                  <h3 class="small"><i class="fa fa-user-o" aria-hidden="true"></i> <%= r.user.username %></h3> &nbsp;&nbsp;<span style="color:#ff9b9b;font-size:15px;"><% if r.hot == 1 %> <i class="fab fa-hotjar"> Hot</i> <% end %></span>
+            <% end %>
+              <ul class="status">
+                <% if r.instance_of?(Reply) %>
+                    <li class="vote"><i class="far fa-thumbs-up" style="color:#0505aa"></i>  <%= r.relikes.size - r.rehates.size %> </li>
+                <% else %>
+                    <li class="vote"><i class="far fa-thumbs-up" style="color:#0505aa"></i>  <%= r.rerelikes.size - r.rerehates.size %> </li>
+                <% end %>
+                <!--<li class="comment"><i class="far fa-comment-dots" style="color:#03b1ef"></i> <%#= replySize %> </li>-->
+              </ul>
+              </a>
+          </article>
+        <% end %>
+        
+        <div class="page_position">
+          <%= paginate @reply%>
+        </div>
+    </div>
+   
+    <!--오른쪽 로그인 및 실시간 -->
+    <div class="conA31" style="float:left;margin-left:5%;flex:2;margin-top:25px;">
+       <div class="leftside">
+         <!--로그인-->
+        <div class="card pconly conA311" style=" padding:10px;">
+            <form class="logged">
+               <% if user_signed_in? %>
+                  <!--<img src="https://cf-fpi.everytime.kr/0.png" class="picture">-->
+                  <h5 class="nickname" style="padding-top:0px;"><%= current_user.username %> </h4>
+                  <a href="/users/sign_out"><button style="font-size:14px;" type="button" class="btn btn-outline-dark">로그아웃</button></a>
+                  <!--<p id="login_btn" class="username"><a id="login_btn" href="/users/sign_out" ><div class="conA3btn">로그아웃</div></a></p>-->
+              <% else %>
+                  <!--<p class="username"><a id="login_btn" href="/users/sign_in"><div class="conA3btn">로그인</div></a></p>-->
+                  <button type="button" class="btn btn-outline-dark">로그인</button>
+              <% end %>   
+            </form>
+        </div>
+        <div class="card">
+          <div class="menus">
+            <div class="menuS" style="padding-left:0;">
+              <a href="/my_profile" class="myarticle"><i class="fas fa-user" style="color: "></i>&nbsp;&nbsp; 프로필</a><br>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/comments/index" onClick="window.open(this.href, '', 'width=500, height=545'); return false;" class="mycommentarticle"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;&nbsp; 쪽지함</a>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/posts/00/index" class="myarticle"><i class="fas fa-list-ul" style="color: ;"></i>&nbsp;&nbsp; 내가 쓴 글</a><br>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/posts/myReply" class="mycommentarticle"><i class="far fa-comment" style="color: ;"></i>&nbsp;&nbsp; 나의 댓글</a>
+            </div>
+          </div>
+        </div>
+         
+         <!--실시간 인기글-->
+            <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;box-shadow: 2px 2px 0px 2px #c3cad8;">
+              <div class="postlistA" style="background-color:#62AEFF ;border-bottom:solid 1px #c5cbd0;">
+                <div class="postlistAtext" >
+                  <a href="/posts/hotPost" class="article" style="color:#f8f9fa;cursor:pointer; text-shadow: 0 0 3px black;"><i class="fas fa-fire" style="color:#00c9b7;"></i> &nbsp 실시간 인기글</a>
+                </div>
+              </div>
+              <% hotPosts = HotPost.all.reverse %>
+              <% (0..4).each do |i|%>
+                <% hotpost = Post.find(hotPosts[i].post_id) %> 
+                <%if i==4 %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 0px #c5cbd0;">
+                <% else %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 1px #c5cbd0;">
+                <% end %>
+                  <div class="postlistAtext" >
+                     <a class="article" href="/posts/show/<%=hotpost.id%>"><%= hotpost.title.truncate(15, omission: '...') %></a><br>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            
+        
+         <!--실시간 인기글-->
+            <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;box-shadow: 2px 2px 0px 2px #c3cad8;">
+              <div class="postlistA" style="background-color:#62AEFF ;border-bottom:solid 1px #c5cbd0;">
+                <div class="postlistAtext" >
+                  <a class="article" style="color:#f8f9fa;cursor:context-menu;text-shadow: 0 0 3px black;"><i class="fa fa-refresh" aria-hidden="true" ></i> &nbsp 실시간 글</a>
+                </div>
+              </div>
+              <% posts_realtime = Post.all.reverse %>
+              <% (0..4).each do |i|%>
+                <%if i==4 %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 0px #c5cbd0;">
+                <% else %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 1px #c5cbd0;">
+                <% end %>
+                  <div class="postlistAtext" >
+                     <a class="article" href="/posts/show/<%= posts_realtime[i].id %>"><%= posts_realtime[i].title.truncate(23, omission: '...') %></a><br>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        
+        
+      </div>
+    </div>
+    
+  </div>
+
+  
+</div>
+
+<%= render "footer" %>
+
+
+<style>
+
+body{
+  
+    background-color:#ebeef1;
+}
+</style>

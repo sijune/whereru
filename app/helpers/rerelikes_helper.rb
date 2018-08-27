@@ -1,0 +1,2 @@
+module RerelikesHelper
+end

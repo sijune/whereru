@@ -1,0 +1,15 @@
+<div class="container">
+  보내는 사람 : <%= User.find(@comment.recipient_id).username %><br>
+  받는 사람 : <%= User.find(@comment.sender_id).username %><br>
+  작성 시간 : <time class="small"><%= "#{time_ago_in_words(@comment.created_at)} 전" %></time><br>
+  
+  내용 : <%= @comment.content %><br>
+  
+  <a href="/comments/new/<%=User.find(@comment.sender_id).id%>">
+      <span class="badge badge-pill badge-success" >답장</span>
+  </a>
+  
+  <a href="/comments/index">
+      <span class="badge badge-pill badge-success" >목록</span>
+  </a>
+</div>

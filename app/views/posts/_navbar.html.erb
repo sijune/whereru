@@ -1,0 +1,105 @@
+<!--<nav class="navbar navbar-expand-lg fixed-top">-->
+<!--	<div class="container">-->
+<!--		<div class="wrap">-->
+<!--		  <div id="logo">-->
+<!--		    <a href="/"><img src="images/logo.png"></a>-->
+<!--		    <#%= link_to image_tag("logo.png"), root_path %>-->
+<!--		    <p><span class="name multiple">WhereRU</span><span class="subname">싱가포르</span></p>-->
+<!--		  </div>-->
+		  
+<!--		 메인 헤더-->
+<!--		  <ul id="menu">-->
+<!--		    <li><a  href="/">게시판</a></li>-->
+<!--		    <li><a href="/journey">여행지 추천</a></li>-->
+<!--		    <li><a href="/house">쉐어하우스</a></li>-->
+<!--		    <li><a href="/market">벼룩시장</a></li>-->
+<!--		  </ul>-->
+<!--		</div>-->
+<!--		  검색기능-->
+<!--		  <form class="form-inline my-2 my-lg-0" action="/posts/search" method="get">-->
+<!--		    <div class="form-group">-->
+<!--		      <select name="cate" class="form-control" id="exampleFormControlSelect1">-->
+<!--		        <option value="1">제목</option>-->
+<!--		        <option value="2">내용</option>-->
+<!--		        <option value="3">제목+내용</option>-->
+<!--		        <option value="4">작성자</option>-->
+<!--		      </select>-->
+<!--		    </div>-->
+<!--		    <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--		    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>-->
+<!--		  </form>-->
+<!--	</div>-->
+<!--</nav>-->
+
+<!--<div id="submenu">-->
+<!--	<div class="wrap">-->
+<!--		<div class="divider"></div>-->
+<!--		<div class="group">-->
+<!--			<h3>일반 게시판</h3>-->
+<!--			<ul>-->
+<!--			<li><a href="/posts//1/index" data-id="377400">싱가포르 자유게시판(신웅_가능)</a></li>-->
+<!--			<li><a href="/375178" data-id="375178">비밀게시판</a></li>-->
+<!--			<li><a href="/375179" data-id="375179">홍보게시판</a></li>-->
+<!--			<li><a href="/375180" data-id="375180">정보게시판</a></li>-->
+<!--			</ul>-->
+<!--		</div>-->
+<!--		<div class="group">-->
+<!--			<h3>&nbsp;</h3>-->
+<!--			<ul>-->
+<!--			<li><a href="/posts/2/index" data-id="372752">구인 구직(신웅_가능)</a></li>-->
+<!--			<li><a href="/372746" data-id="372746">소모임</a></li>-->
+<!--			<li><a href="/386036" data-id="386036">여행객게시판</a></li>-->
+<!--			<li><a href="/385911" data-id="385911">새내기게시판</a></li>-->
+<!--			</ul>-->
+<!--		</div>-->
+<!--		<div class="divider"></div>-->
+<!--		<div class="group">-->
+<!--			<h3>전체 게시판</h3>-->
+<!--			<ul>-->
+<!--			<li><a href="/393034" data-id="393034">연애 상담 게시판</a></li>-->
+<!--			<li><a href="/386677" data-id="386677">끝말잇기</a></li>-->
+<!--			<li><a href="/posts/3/index" data-id="398686">쉐어하우스(신웅_가능)</a></li> 전택배게시판-->
+<!--			<li><a href="/posts/4/index" data-id="399714">벼룩시장(신웅_가능)</a></li> 전헬스게시판-->
+<!--			</ul>-->
+<!--		</div>-->
+<!--		<div class="group">-->
+<!--			<h3>&nbsp;</h3>-->
+<!--			<ul>-->
+<!--			<li><a href="/389815" data-id="389815">불만제로</a></li>-->
+<!--			<li><a href="/380678" data-id="380678">근교 여행지</a></li>-->
+<!--			<li><a href="/401408" data-id="401408">스터디구해요</a></li>-->
+<!--			<li><a href="/388227" data-id="388227" style="color:red">더보기</a></li>-->
+<!--			</ul>-->
+<!--		</div>-->
+<!--		<div class="divider"></div>-->
+<!--		<hr>-->
+<!--	</div>-->
+<!--</div>	-->
+
+<nav class="navbar navbar-expand-lg fixed-top" style="display:block;background-color: #fff;">
+	<div class="container">
+		<!--로고-->	
+		  <div id="logo">
+		    <%= link_to image_tag("logo.png"), root_path %>
+		    <p><span class="name multiple">WhereRU</span><span class="subname">싱가포르</span></p>
+		  </div>
+	
+		  <!--검색기능-->
+		  <div class="doSearch">
+			  <form class="form-inline my-2 my-lg-0" action="/posts/search" method="get">
+			    <div class="form-group">
+			      <select name="cate" class="form-control" id="exampleFormControlSelect1">
+			        <option value="1">제목</option>
+			        <option value="2">내용</option>
+			        <option value="3">제목+내용</option>
+			        <option value="4">작성자</option>
+			      </select>
+			    </div>
+			    <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
+			  </form>
+		  </div>
+	</div>
+</nav>
+
+    

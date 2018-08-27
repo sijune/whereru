@@ -1,0 +1,281 @@
+<div align=center >
+    <!--위에 색깔 줄-->
+    <table width="100%" align="center" cellpadding="0" cellspacing="0"  >
+        <tr>
+            <!--<td width="100%" height="5" valign="bottom" title=#e55356 bgcolor="#12E0A3" colspan="3" align="center" style="position:fixed; z-index:100001;">-->
+             
+            </td>
+        </tr>
+    </table>
+    <!--로고+검색창-->
+    <!--background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c); padding-bottom:5px;-->
+    <div align=center style="overflow:hidden;clear:both;width:100%; background-image: linear-gradient(to right, #4776e8, #4885ef, #4d93f5, #56a0fb, #62aeff);padding-bottom:5px;position:fixed; z-index:100000; ">
+    <div class="container" id="CONT" >
+        <!--로고-->
+        <div style="float:left;height:66px;" align=left>
+            <div id="logo">
+    		    <%= link_to image_tag("logo_9.png"), root_path %>
+    		    <!--<img src="/app/assets/images/logo.png">-->
+    		    <p><span class="name multiple" style=" color:#ebeef1;">WhereRU</span><span class="subname" style="color:white; font-weight: bold; ">싱가포르</span></p>
+	    	</div>
+        </div>
+        
+
+
+        
+        <!--검색창-->
+        <div style="float:right;padding-top:8px"  class=nanum-g>
+            <div style="display:inline-block;padding-top:8px;margin:0;" class="doSearch">
+			  <form class="form-inline my-2 my-lg-0" action="/posts/search" method="get">
+			    <div class="form-group">
+			        <!--알림보여주기-->
+                        <% if user_signed_in? %>	
+                        <div style="display: relative; margin-top:0px;">
+                            <a onclick="sign_out()">
+                            <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyOTkuOTk1IDI5OS45OTUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI5OS45OTUgMjk5Ljk5NTsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIxMjhweCIgaGVpZ2h0PSIxMjhweCI+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGQ9Ik0xNDkuOTk3LDE2MS40ODVjLTguNjEzLDAtMTUuNTk4LDYuOTgyLTE1LjU5OCwxNS41OThjMCw1Ljc3NiwzLjE0OSwxMC44MDcsNy44MTcsMTMuNTA1djE3LjM0MWgxNS41NjJ2LTE3LjM0MSAgICAgYzQuNjY4LTIuNjk3LDcuODE3LTcuNzI5LDcuODE3LTEzLjUwNUMxNjUuNTk1LDE2OC40NjcsMTU4LjYxMSwxNjEuNDg1LDE0OS45OTcsMTYxLjQ4NXoiIGZpbGw9IiNGRkZGRkYiLz4KCQkJPHBhdGggZD0iTTE1MC4wMDMsODUuODQ5Yy0xMy4xMTEsMC0yMy43NzUsMTAuNjY1LTIzLjc3NSwyMy43NzV2MjUuMzE5aDQ3LjU0OHYtMjUuMzE5ICAgICBDMTczLjc3NSw5Ni41MTYsMTYzLjExMSw4NS44NDksMTUwLjAwMyw4NS44NDl6IiBmaWxsPSIjRkZGRkZGIi8+CgkJCTxwYXRoIGQ9Ik0xNDkuOTk1LDAuMDAxQzY3LjE1NiwwLjAwMSwwLDY3LjE1OSwwLDE0OS45OThjMCw4Mi44MzcsNjcuMTU2LDE0OS45OTcsMTQ5Ljk5NSwxNDkuOTk3czE1MC02Ny4xNjEsMTUwLTE0OS45OTcgICAgIEMyOTkuOTk1LDY3LjE1OSwyMzIuODM0LDAuMDAxLDE0OS45OTUsMC4wMDF6IE0xOTYuMDg1LDIyNy4xMThoLTkyLjE3M2MtOS43MzQsMC0xNy42MjYtNy44OTItMTcuNjI2LTE3LjYyOXYtNTYuOTE5ICAgICBjMC04LjQ5MSw2LjAwNy0xNS41ODIsMTQuMDAzLTE3LjI1di0yNS42OTdjMC0yNy40MDksMjIuMy00OS43MTEsNDkuNzExLTQ5LjcxMWMyNy40MDksMCw0OS43MDksMjIuMyw0OS43MDksNDkuNzExdjI1LjY5NyAgICAgYzcuOTkzLDEuNjczLDE0LDguNzU5LDE0LDE3LjI1djU2LjkxOWgwLjAwMkMyMTMuNzExLDIxOS4yMjUsMjA1LjgxOSwyMjcuMTE4LDE5Ni4wODUsMjI3LjExOHoiIGZpbGw9IiNGRkZGRkYiLz4KCQk8L2c+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" / style="width:7%;"> &nbsp &nbsp  &nbsp
+                               </a>
+                               
+                               <a href="/my_profile">
+                               <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU1IDU1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1NSA1NTsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIxMjhweCIgaGVpZ2h0PSIxMjhweCI+CjxwYXRoIGQ9Ik01NSwyNy41QzU1LDEyLjMzNyw0Mi42NjMsMCwyNy41LDBTMCwxMi4zMzcsMCwyNy41YzAsOC4wMDksMy40NDQsMTUuMjI4LDguOTI2LDIwLjI1OGwtMC4wMjYsMC4wMjNsMC44OTIsMC43NTIgIGMwLjA1OCwwLjA0OSwwLjEyMSwwLjA4OSwwLjE3OSwwLjEzN2MwLjQ3NCwwLjM5MywwLjk2NSwwLjc2NiwxLjQ2NSwxLjEyN2MwLjE2MiwwLjExNywwLjMyNCwwLjIzNCwwLjQ4OSwwLjM0OCAgYzAuNTM0LDAuMzY4LDEuMDgyLDAuNzE3LDEuNjQyLDEuMDQ4YzAuMTIyLDAuMDcyLDAuMjQ1LDAuMTQyLDAuMzY4LDAuMjEyYzAuNjEzLDAuMzQ5LDEuMjM5LDAuNjc4LDEuODgsMC45OCAgYzAuMDQ3LDAuMDIyLDAuMDk1LDAuMDQyLDAuMTQyLDAuMDY0YzIuMDg5LDAuOTcxLDQuMzE5LDEuNjg0LDYuNjUxLDIuMTA1YzAuMDYxLDAuMDExLDAuMTIyLDAuMDIyLDAuMTg0LDAuMDMzICBjMC43MjQsMC4xMjUsMS40NTYsMC4yMjUsMi4xOTcsMC4yOTJjMC4wOSwwLjAwOCwwLjE4LDAuMDEzLDAuMjcxLDAuMDIxQzI1Ljk5OCw1NC45NjEsMjYuNzQ0LDU1LDI3LjUsNTUgIGMwLjc0OSwwLDEuNDg4LTAuMDM5LDIuMjIyLTAuMDk4YzAuMDkzLTAuMDA4LDAuMTg2LTAuMDEzLDAuMjc5LTAuMDIxYzAuNzM1LTAuMDY3LDEuNDYxLTAuMTY0LDIuMTc4LTAuMjg3ICBjMC4wNjItMC4wMTEsMC4xMjUtMC4wMjIsMC4xODctMC4wMzRjMi4yOTctMC40MTIsNC40OTUtMS4xMDksNi41NTctMi4wNTVjMC4wNzYtMC4wMzUsMC4xNTMtMC4wNjgsMC4yMjktMC4xMDQgIGMwLjYxNy0wLjI5LDEuMjItMC42MDMsMS44MTEtMC45MzZjMC4xNDctMC4wODMsMC4yOTMtMC4xNjcsMC40MzktMC4yNTNjMC41MzgtMC4zMTcsMS4wNjctMC42NDgsMS41ODEtMSAgYzAuMTg1LTAuMTI2LDAuMzY2LTAuMjU5LDAuNTQ5LTAuMzkxYzAuNDM5LTAuMzE2LDAuODctMC42NDIsMS4yODktMC45ODNjMC4wOTMtMC4wNzUsMC4xOTMtMC4xNCwwLjI4NC0wLjIxN2wwLjkxNS0wLjc2NCAgbC0wLjAyNy0wLjAyM0M1MS41MjMsNDIuODAyLDU1LDM1LjU1LDU1LDI3LjV6IE0yLDI3LjVDMiwxMy40MzksMTMuNDM5LDIsMjcuNSwyUzUzLDEzLjQzOSw1MywyNy41ICBjMCw3LjU3Ny0zLjMyNSwxNC4zODktOC41ODksMTkuMDYzYy0wLjI5NC0wLjIwMy0wLjU5LTAuMzg1LTAuODkzLTAuNTM3bC04LjQ2Ny00LjIzM2MtMC43Ni0wLjM4LTEuMjMyLTEuMTQ0LTEuMjMyLTEuOTkzdi0yLjk1NyAgYzAuMTk2LTAuMjQyLDAuNDAzLTAuNTE2LDAuNjE3LTAuODE3YzEuMDk2LTEuNTQ4LDEuOTc1LTMuMjcsMi42MTYtNS4xMjNjMS4yNjctMC42MDIsMi4wODUtMS44NjQsMi4wODUtMy4yODl2LTMuNTQ1ICBjMC0wLjg2Ny0wLjMxOC0xLjcwOC0wLjg4Ny0yLjM2OXYtNC42NjdjMC4wNTItMC41MiwwLjIzNi0zLjQ0OC0xLjg4My01Ljg2NEMzNC41MjQsOS4wNjUsMzEuNTQxLDgsMjcuNSw4ICBzLTcuMDI0LDEuMDY1LTguODY3LDMuMTY4Yy0yLjExOSwyLjQxNi0xLjkzNSw1LjM0Ni0xLjg4Myw1Ljg2NHY0LjY2N2MtMC41NjgsMC42NjEtMC44ODcsMS41MDItMC44ODcsMi4zNjl2My41NDUgIGMwLDEuMTAxLDAuNDk0LDIuMTI4LDEuMzQsMi44MjFjMC44MSwzLjE3MywyLjQ3Nyw1LjU3NSwzLjA5Myw2LjM4OXYyLjg5NGMwLDAuODE2LTAuNDQ1LDEuNTY2LTEuMTYyLDEuOTU4bC03LjkwNyw0LjMxMyAgYy0wLjI1MiwwLjEzNy0wLjUwMiwwLjI5Ny0wLjc1MiwwLjQ3NkM1LjI3Niw0MS43OTIsMiwzNS4wMjIsMiwyNy41eiIgZmlsbD0iI0ZGRkZGRiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" / style="width:7%;
+                               ">&nbsp &nbsp  &nbsp
+                               </a>
+                               <!--<a href="/my_profile"><i id="nav_icon_2" class="fas fa-user" style="color:white; font-size:25px;"></i> &nbsp &nbsp  &nbsp</a>-->
+                            <a href="/comments/index" onClick="window.open(this.href, '', 'width=500, height=545'); return false;">
+                                <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyOTkuOTkgMjk5Ljk5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOTkuOTkgMjk5Ljk5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMTQ5Ljk5NSwwQzY3LjE1OCwwLDAsNjcuMTU2LDAsMTQ5Ljk5NVM2Ny4xNTgsMjk5Ljk5LDE0OS45OTUsMjk5Ljk5YzgyLjgzOSwwLDE0OS45OTUtNjcuMTU2LDE0OS45OTUtMTQ5Ljk5NSAgICBTMjMyLjgzNCwwLDE0OS45OTUsMHogTTg5LjQ4MSwyMTEuMjE5bC0zNy4xNzYsOS45NTlsMTAuMTc3LTM3Ljk3M2MtNy4wMS0xMi4wNS0xMS4wNTEtMjYuMDUtMTEuMDUxLTQwLjk5NyAgICBjMC00NS4wNzQsMzYuNTQxLTgxLjYxOCw4MS42Mi04MS42MThjNDUuMDcxLDAsODEuNjE1LDM2LjU0NCw4MS42MTUsODEuNjE4YzAsNDUuMDc0LTM2LjU0NCw4MS42Mi04MS42MTUsODEuNjIgICAgQzExNy4wMjMsMjIzLjgzMiwxMDIuMDkxLDIxOS4xOTksODkuNDgxLDIxMS4yMTl6IE0yNDcuNzYsMjM2Ljk3NmwtMzMuODE4LTkuMDU5Yy0xMS40NzcsNy4yNTctMjUuMDU3LDExLjQ3NC0zOS42MywxMS40NzQgICAgYy0xMC4zOSwwLTIwLjI3MS0yLjE0Mi0yOS4yNDgtNS45OTljNDUuMDY0LTUuOSw3OS45ODEtNDQuNTI3LDc5Ljk4MS05MS4xNzdjMC0xMy41MTgtMi45NTktMjYuMzUxLTguMjE2LTM3LjkyNiAgICBjMTkuMTgyLDEzLjQyNywzMS43MywzNS42NywzMS43Myw2MC44NTNjMCwxMy41OTYtMy42NzMsMjYuMzMtMTAuMDUsMzcuMjkzTDI0Ny43NiwyMzYuOTc2eiIgZmlsbD0iI0ZGRkZGRiIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" / style="width:7%">&nbsp &nbsp</a>
+                                    
+                            <span style="font-size:25px; color:#4776E8 ;"> |&nbsp</span>
+                            <a onclick="showHide('info_html')" onfocus="this.blur()"  style="position:relative; color:white; font-size: 23px; padding-right: 20px"><b><i id="nav_icon_1" class="fa fa-bell"></i></b> <%= current_user.new_notifications.unread_by(current_user).count %></a>
+                            <div id="info_html" class="nav-alarm" style="position:fixed; top: 5px; z-index: 1000; overflow: hidden;">
+                                <div class="balloon"> 
+                                    <%= render partial: "new_notifications/new_notification", class: 'hoi',collection: current_user.new_notifications.unread_by(current_user)[0..4] %>
+                                    <%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path %>
+                                </div>
+                            </div>
+                           
+                          </div>
+                        <% end %>
+                        <!--알림보여주기 끝-->
+			      <!--<select name="cate" class="form-control" id="exampleFormControlSelect1">-->
+			      <!--  <option value="1">제목</option>-->
+			      <!--  <option value="2">내용</option>-->
+			      <!--  <option value="3">제목+내용</option>-->
+			      <!--  <option value="4">작성자</option>-->
+			      <!--</select>-->
+			     
+			    </div> 
+			    <!--<input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+			    <!--<button class="btn btn-outline-primary my-2 my-sm-0" type="submit" style="color:white; border-color:white;">검색</button>-->
+			   
+			 
+			  </form>
+			  
+		    </div>
+        </div>
+    </div>
+    </div>
+    
+<!--여기까지 네브바 1-->
+<!--네브바 2-->
+    <!--<div align=center style="overflow:hidden;clear:both;width:100%; background-color: white; margin-top:0px; height:121.8px; position:fixed; z-index:1;max-width: 1100px; "></div>-->
+<!--선넣기-->
+    <div align=center style="display:relative;width:100%; background-color: transparent; margin-top:70px; height:55px;position:fixed; z-index:10;">
+        <div class="container header_tog" style="background-color:transparent; max-width: 100%">
+            
+           
+                    <div class="header">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom:1px solid #ddd;">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                          <div class="navbar-nav">
+                            <!--<a class="nav-item nav-link" style="  cursor:context-menu; width:14.25%; text-align:center;">-->
+                            <a class="nav-item nav-link" href="#" id="navB"><i class="fas fa-star" style=" color:#4776E8; font-weight: bold;"></i> <span style="font-size:15px">&nbsp추천</span></a>
+                            <a class="nav-item nav-link" href="#" id="navC"><i class="fas fa-book-reader" style="color:#4776E8;"></i> <span style="font-size:15px">&nbsp생활정보</span></a>
+                            <a class="nav-item nav-link" href="#" id="navC"><i class="fas fa-comments" style="color:#4776E8;"></i> <span style="font-size:15px">&nbsp소소한이야기</span></a>
+                            <a class="nav-item nav-link" href="#" id="navD"><i class="fas fa-plane" style="color:#4776E8;"></i><span style="font-size:15px"> &nbsp여행/맛집</span></a>
+                            <a class="nav-item nav-link" href="#" id="navE"><i class="fas fa-users" style="color:#4776E8;"></i> <span style="font-size:15px">&nbsp모임/과외</span></a>
+                            <a class="nav-item nav-link" href="#" id="navF"><i class="fas fa-gavel" style="color:#4776E8;"></i> <span style="font-size:15px">&nbsp법률/상담</span></a>
+                            <a class="nav-item nav-link" href="#" id="navF"><i class="fas fa-share-alt" style="color:#4776E8;"></i> <span style="font-size:15px">&nbsp구인구직<span></a>
+
+                          </div>
+                        </div>
+                      </nav>
+                      <div class="header-bar" style="display: flex; max-width: 100%; margin-left:auto ; margin-right:auto ; text-align: center; padding-top: 7px; padding-bottom: 10px; display:flex; ">
+                        <ul class="list" style="flex:1; text-align: left; margin-left: 2%;">
+                          <a href="/posts/hotPost" id="nav_table_1"><li>실시간 인기글</li></a>
+                          <a href="/posts/03/index"id="nav_table_1"><li>오늘의 인기글<li></a>
+                          <a href="/posts/04/index"id="nav_table_1"><li>주간 인기글<li></a>
+                          <a href="/posts/05/index"id="nav_table_1"><li>월간 인기글<li></a>
+                        </ul>
+                        <ul class="list" style="flex:1;text-align: left; margin-left: 2%">
+                          <a href="/posts/11/index" id="nav_table_1"><li>자유게시판</li></a>
+                          <a href="/posts/12/index"id="nav_table_1"><li>뉴스<li></a>
+                          <a href="/posts/13/index_pic"id="nav_table_1"><li>쉐어하우스<i class="fas fa-image"></i><li></a>
+                          <a href="/posts/14/index_pic"id="nav_table_1"><li>벼룩시장<i class="fas fa-image"></i><li></a>
+                          <a href="/posts/15/index"id="nav_table_1"><li>세일정보<li></a>
+                          <a href="/posts/17/index"id="nav_table_1"><li>생활꿀팁<li></a>
+                        </ul>
+                        <ul class="list" style="flex:1;text-align: left; margin-left: 0%">
+                          <a href="/posts/21/index" id="nav_table_1"><li>연애이야기</li></a>
+                          <a href="/posts/22/index"id="nav_table_1"><li>일상이야기<li></a>
+                          <a href="/posts/23/index"id="nav_table_1"><li>익명이야기<li></a>
+                          <a href="/posts/24/index"id="nav_table_1"><li>영어단어퀴즈<li></a>
+                          <a href="/posts/25/index"id="nav_table_1"><li>달러거래<li></a>
+                          <a href="/posts/26/index"id="nav_table_1"><li>정치/사회이야기<li></a>
+                        </ul>
+                        <ul class="list" style="flex:1;text-align: left; margin-left: 1%;">
+                          <a href="/posts/31/index" id="nav_table_1"><li>같이가요</li></a>
+                          <a href="/posts/32/index"id="nav_table_1"><li>여행지추천<li></a>
+                          <a href="/posts/33/index"id="nav_table_1"><li>여행후기<li></a>
+                          <a href="/posts/34/index"id="nav_table_1"><li>맛집<li></a>
+                        </ul>
+                        <ul class="list" style="flex:1;text-align: left; margin-left: 1%; margin-right: 1%;">
+                          <a href="/posts/41/index" id="nav_table_1"><li>소모임</li></a>
+                          <a href="/posts/42/index"id="nav_table_1"><li>영어스터디<li></a>
+                          <a href="/posts/43/index"id="nav_table_1"><li>언어교환<li></a>
+                          <a href="/posts/44/index"id="nav_table_1"><li>과외<li></a>
+                        </ul>
+                        <ul class="list" style="flex:1;text-align: left; margin-right: 1%;">
+                          <a href="/posts/51/index" id="nav_table_1"><li>택스/연금</li></a>
+                          <a href="/posts/53/index"id="nav_table_1"><li>이민상담<li></a>
+                          <a href="/posts/54/index"id="nav_table_1"><li>유학상담<li></a>
+                        </ul>
+                        <ul class="list" style="flex:1;text-align: left; margin-left: 1%;">
+                          <a href="/posts/61/index" id="nav_table_1"><li>구인</li></a>
+                          <a href="/posts/62/index"id="nav_table_1"><li>구직<li></a>
+                        </ul>
+                      </div>
+                      </div>
+              <div style="background-color:black; ">
+            </div>
+        </div>
+    </div>
+<!--네브바 2 끝-->
+<!--117-->
+    <div class="container" style="margin-top:115px;"></div>
+
+<!--네브바2-->
+<!--<div align=center style="width:100%;background-color:#e9ecef;background-repeat:repeat-x;">-->
+<!--    <div class="topmenubox nanum-g" id="topmenubox" align=center style="border-top:1px solid #cecece;border-bottom:1px solid #cecece;">-->
+<!--    <div class="popmenu07" id="topmenu07" align=center style="padding-top:10px;padding-bottom:12px;width:988px;display:inline-block;" >-->
+
+<!--    <dl class="menusty02"  >-->
+    
+<!--    <dd style="background-color:#fafafa;border-radius:0px;box-shadow:0 3px 0 0 rgba(0,0,0,0.05);border:1px solid #cecece;">-->
+<!--        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">-->
+<!--           <li class="forumtit01 daum" ><i class="fas fa-star" style="color:#0505aa; font-weight: bold;"></i> 추천</li>-->
+<!--    	    <li class="hide"><a href="/posts/hotPost">실시간 인기글</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/03/index">일간 인기글</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/04/index">주간 인기글</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/05/index">월간 인기글</a></li>-->
+<!--        </ul>-->
+   
+
+<!--        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">-->
+<!--            <li class="forumtit01 daum" ><i class="fas fa-heart" style="color:#0505aa; font-weight: bold;"></i> 생활정보</li>-->
+    	      
+<!--    	    <li class="hide"><a href="/posts/11/index">자유게시판</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/12/index">뉴스</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/13/index_pic">쉐어하우스</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/14/index_pic">벼룩시장</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/15/index">세일정보</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/17/index">생활꿀팁</a></li>-->
+           
+            
+<!--        </ul>-->
+        
+
+<!--        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">-->
+<!--             <li class="forumtit01 daum" ><i class="fas fa-book-reader" style="color:#0505aa;"></i> 소소한 이야기</li>-->
+    	      
+    	    
+<!--    	    <li class="hide"><a href="/posts/21/index">연애이야기</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/22/index">일상이야기</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/23/index">익명이야기</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/24/index">영어단어 퀴즈</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/25/index">달러거래</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/26/index">정치/사회 이야기</a></li>-->
+            
+    	    
+            
+<!--        </ul>-->
+        
+<!--        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">-->
+<!--            <li class="forumtit01 daum" ><i class="fas fa-plane" style="color:#0505aa;"></i> 여행/맛집</li>-->
+    	      
+<!--    	    <li class="hide"><a href="/posts/31/index">같이가요</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/32/index">여행지 추천</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/33/index">여행후기</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/34/index">맛집</a></li>-->
+    	   
+    	    
+            
+<!--        </ul>-->
+        
+<!--        <ul style="border-right:1px solid #f2f2f2;margin-top:12px;margin-bottom:8px;">-->
+<!--             <li class="forumtit01 daum" ><i class="fas fa-share-alt" style="color:#0505aa;"></i> 법률/상담</li>-->
+    	      
+<!--    	    <li class="hide"><a href="/posts/51/index">텍스/연금</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/54/index">유학상담</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/54/index">이민상담</a></li>-->
+<!--    	    <br>-->
+<!--            <li class="forumtit01 daum" ><i class="far fa-building" style="color:#0505aa;"></i> 구인구직</li>-->
+    	      
+<!--    	    <li class="hide"><a href="/posts/61/index">구인</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/62/index">구직</a></li>-->
+            
+           
+<!--        </ul>-->
+        
+<!--        <ul style="margin-top:12px;margin-bottom:8px;">-->
+<!--            <li class="forumtit01 daum" ><i class="fas fa-comments" style="color:#0505aa;"></i> 모임/과외</li>-->
+               
+<!--    	    <li class="hide"><a href="/posts/41/index">소모임</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/42/index">영어 스터디</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/43/index">언어교환</a></li>-->
+<!--    	    <li class="hide"><a href="/posts/44/index">과외</a></li>-->
+<!--    	    <br>-->
+<!--    	    <li class="forumtit01 daum hide" style="border-top:1px solid #f2f2f2;"><i class="far fa-lightbulb" style="color:#0505aa;"></i> 요청</li>-->
+<!--    	    <li class="hide"><a href="/posts/63/index">게시판 개설</a></li>-->
+<!--        </ul>-->
+
+<!--    </dd>-->
+<!--	</dl>-->
+<!--	</div>-->
+<!--    </div>-->
+
+
+
+
+
+<!--<div id="left" style="width:32px;position:absolute;top:84px; z-index:0;right:50%;margin-right:490px;cursor:pointer;" onclick="OnOpenClose()"><i id="button"class="fas fa-sort"></i></div>-->
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(function(){
+      $('.header-bar').hide();
+  $('.navbar').mouseenter(function(){
+    $('.header-bar').show().css('display', 'flex');
+  });
+  $('.header-bar').mouseleave(function(){
+    $('.header-bar').hide();
+  })
+});
+ 
+</script>
+
+<script type="text/javascript">
+function sign_out(){
+    if (confirm("로그아웃 하시겠습니까?") == true){    //확인
+        // document.form.submit();
+        window.location.href=("/users/sign_out");
+    }
+    else{   
+    }
+}
+</script>

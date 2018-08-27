@@ -1,0 +1,24 @@
+<div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">받는 사람</th>
+          <th scope="col">보내는 사람</th>
+          <th scope="col">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @comments.each do |c| %>
+        <tr>
+          <td><%=User.find(c.recipient_id).username%></td>
+          <td><%=User.find(c.sender_id).username%></td>
+          <td><a href="/comments/show/<%=c.id%>"><%=c.content.truncate(15, omission: '...')%></a></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @comments%>
+    <a href="/comments/index">
+      <span class="badge badge-pill badge-success" >목록</span>
+    </a>
+</div>

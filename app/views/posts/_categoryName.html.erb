@@ -1,0 +1,149 @@
+<div>
+<table align="center" cellpadding="0"  width="778"  style="margin-bottom:3px;" >
+  <tr>
+      <td width="650"  style="padding-left:0px;" valign=middle align=left height=44>
+        <span class="badge badge-secondary badge-info" style="margin-right:5px;font-size:20px;background-color:#00c9b7;text-shadow: 0 0 1px black;box-shadow: 2px 2px #c3cad8;color:#b1b1b1;padding:6px 16px 6px 16px;">
+            <%if @category == 13 %>
+                <a href="/posts/13/index_pic">
+            <%elsif @category == 14 %>
+                <a href="/posts/14/index_pic">
+            <%elsif @category == 02 %>
+                <a href="/posts/hotPost">      
+            <%elsif @category == 64 %>
+                <a href="/my_profile">        
+            <%else%>
+                <a href="/posts/<%=@category%>/index">
+            <%end%>
+                <span style="color:#fff;font-size:18px;"  class="daum">
+          
+            <!--마이페이지-->
+            <%if @category == 00 %>
+                내가 쓴 글
+            
+            <%elsif @category == 01 %>
+                나의 댓글
+                
+            <!--실시간 인기글-->
+            <%elsif @category == 02 %>
+                실시간 인기글
+                
+            <%elsif @category == 03 %>
+                일간 인기글
+                
+            <%elsif @category == 04 %>
+                주간 인기글
+            
+            <%elsif @category == 05 %>
+                월간 인기글
+                
+            <!--생활정보-->
+            <%elsif @category == 11 %>
+                자유게시판
+        
+            <%elsif @category == 12 %>
+                뉴스
+          
+            <%elsif @category == 13 %>
+                쉐어하우스
+                
+            <%elsif @category == 14 %>
+                벼룩시장
+            
+            <%elsif @category == 15 %>
+                세일정보
+            
+            <%elsif @category == 16 %>
+                해외특송
+            
+            <%elsif @category == 17 %>
+                생활꿀팁
+            
+            <!--소소한이야기-->
+            <%elsif @category == 21 %>
+                연애이야기
+          
+            <%elsif @category == 22 %>
+                일상이야기
+                
+            <%elsif @category == 23 %>
+                익명이야기
+            
+            <%elsif @category == 24 %>
+                영어단어 퀴즈
+            
+            <%elsif @category == 25 %>
+                달러거래
+            
+            <%elsif @category == 26 %>
+                정치/사회
+                
+            <!--여행/맛집-->
+            <%elsif @category == 31 %>
+                같이가요
+                
+            <%elsif @category == 32 %>
+                여행지 추천
+            
+            <%elsif @category == 33 %>
+                여행후기
+            
+            <%elsif @category == 34 %>
+                맛집
+            
+            <!--모임/과외-->
+            <%elsif @category == 41 %>
+                소모임
+                
+            <%elsif @category == 42 %>
+                영어 스터디
+            
+            <%elsif @category == 43 %>
+                언어교환
+            
+            <%elsif @category == 44 %>
+                과외
+            
+            <!--법률/상담-->
+            <%elsif @category == 51 %>
+                텍스/연금
+                
+            <%elsif @category == 52 %>
+                연금
+            
+            <%elsif @category == 53 %>
+                이민상담
+            
+            <%elsif @category == 54 %>
+                유학상담
+            
+            <!--구인/구직-->
+            <%elsif @category == 61 %>
+                구인
+                
+            <%elsif @category == 62 %>
+                구직
+                
+            <%elsif @category == 63 %>
+                게시판 개설 요청
+            
+            <%elsif @category == 64 %>
+                프로필
+            <% end %>
+          
+            </span></a></span> 
+            <span CLASS="sm mbox" style="color:#848688;padding:5px 0 5px 2px;">정치 사회적 문제의식을 포함하는 글은 정치/사회/이슈에 올려주시기 바랍니다.</span>
+            
+            <% if @new != 1 %>
+            <div style="float:right;">
+                <% if @category != 00 && @category != 01 && @category != 02 && @category != 03 && @category != 04 && @category != 05 && @category != 64 %>
+                    <a href="/posts/<%= @category %>/new">
+                      <button type="button" class="btn btn-outline-primary">글쓰기</button>
+                    </a>
+                <% end %>
+            </div>
+            <% end %>
+      </td>   
+  </tr>
+</table>
+</div>
+  

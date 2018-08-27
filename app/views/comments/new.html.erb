@@ -1,0 +1,15 @@
+<div class="container">
+  <form action="/comments/create" method="post">
+        <div class="form-group">
+          받는 사람 : <%= @recipient.username %><br>
+          보내는 사람 : <%= current_user.username %><br>
+          <input name="recipient" type="hidden" value="<%= @recipient.id %>"> </input>
+        </div>
+        
+          <label for="exampleFormControlTextarea1"></label>
+          <textarea name="content" id="exampleFormControlTextarea1" rows="10" style="width:50%;" placeholder="내용을 입력하세요."></textarea>
+  
+        <!--<input name="image" type="file" accept="image/*">-->
+        <button type="submit" class="btn btn-primary">제출</button>
+  </form>
+</div>

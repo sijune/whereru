@@ -1,0 +1,21 @@
+<div class="container">
+    <div style="text-align: center; margin-bottom: 5px; margin-top: 5%; margin-bottom: 3%">
+        <h1>프로필 새로 만들기</h1>
+    </div>
+    <div class="profile_new">
+        <%= render 'form' , profile: @profile, path: create_profile_path %>
+    </div>
+</div>
+
+<style>
+body{
+	background-color: #F8F7F8;
+}
+    .profile_new {
+        background-color: #FFFFFF;
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 5%;
+    }
+</style>
