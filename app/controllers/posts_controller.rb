@@ -180,8 +180,10 @@ class PostsController < ApplicationController
     #   @post=Post.where("content LIKE ?","%#{params[:q]}%").order("created_at DESC").page(params[:page]).per(10)
     #   @total=Post.where("content LIKE ?","%#{params[:q]}%").count
     # elsif params[:cate]=="3"
-      @post=Post.where("title Like ? OR content LIKE ?","%#{params[:q]}%", "%#{params[:q]}%").order("created_at DESC").page(params[:page]).per(10)
+      @posts=Post.where("title Like ? OR content LIKE ?","%#{params[:q]}%", "%#{params[:q]}%").order("created_at DESC").page(params[:page]).per(10)
       @total=Post.where("title Like ? OR content LIKE ?","%#{params[:q]}%", "%#{params[:q]}%").count
+      @search = params[:q]
+      @category = 99
     # elsif params[:cate]=="4"
     #   @post=User.where("username LIKE ?","%#{params[:q]}%").take.posts.order("created_at DESC").page(params[:page]).per(10)
     #   @total=User.where("username LIKE ?","%#{params[:q]}%").take.posts.count

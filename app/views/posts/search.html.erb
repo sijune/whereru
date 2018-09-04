@@ -1,168 +1,256 @@
 <%= render "navbar3" %>
 
-<div class="container">
+<div class="container" >
   <div class="wrapAll" style="display:flex;">
-    <!--검색목록-->
-    <div class="wrap" style="float:left;flex:5;">
-    <div>
-      <table align="center" cellpadding="0"  width="778"  style="margin-bottom:3px;" >
-        <tr>
-            <td width="650"  style="padding-left:0px;" valign=middle align=left height=44>
-              <span class="badge badge-secondary badge-info" style="margin-right:5px;font-size:20px;color:#b1b1b1;padding:6px 16px 6px 16px;"><a href="/posts/<%=@category%>/index"><span style="color:#fff;font-size:18px;"  class="daum">
-              검색
-              </span></a></span> <span CLASS="sm mbox" style="color:#848688;padding:5px 0 5px 2px;">정치 사회적 문제의식을 포함하는 글은 정치/사회/이슈에 올려주시기 바랍니다.</span>
-              
-            </td>   
-        </tr>
-      </table>
-    </div>
-  
+    <!--왼쪽 인덱스-->
+    <div class="wrap" style="background-color:white; border-left: 2px #f8f9fa;padding:30px; box-shadow: 2px 2px 0px 2px #c3cad8;float:left;flex:5;">
+      <%= render "categoryName" %>
+      
+
+        
+      <!--#시준 조회수 구현 -->  
+        <% @posts.each do |p| %>
+          <article>
+            
+            <a class="article" href="/posts/show/<%= p.id %>">
+            <h2 class="medium">
+          <% if @category == 00 %>
+            <span style="color:#4776E8 ; font-weight:700">
+            <%if p.category_id == 11 %>
+                [자유게시판]
+        
+            <%elsif p.category_id == 12 %>
+                [뉴스]
+          
+            <%elsif p.category_id == 13 %>
+                [쉐어하우스]
+                
+            <%elsif p.category_id == 14 %>
+                [벼룩시장]
+            
+            <%elsif p.category_id == 15 %>
+                [세일정보]
+            
+            <%elsif p.category_id == 16 %>
+                [해외특송]
+            
+            <%elsif p.category_id == 17 %>
+                [생활꿀팁]
+            
+            <!--소소한이야기-->
+            <%elsif p.category_id == 21 %>
+                [연애이야기]
+          
+            <%elsif p.category_id == 22 %>
+                [일상이야기]
+                
+            <%elsif p.category_id == 23 %>
+                [익명이야기]
+            
+            <%elsif p.category_id == 24 %>
+                [영어단어 퀴즈]
+            
+            <%elsif p.category_id == 25 %>
+                [달러거래]
+            
+            <%elsif p.category_id == 26 %>
+                [정치/사회]
+                
+            <!--여행/맛집-->
+            <%elsif p.category_id == 31 %>
+                [같이가요]
+                
+            <%elsif p.category_id == 32 %>
+                [여행지 추천]
+            
+            <%elsif p.category_id == 33 %>
+                [여행후기]
+            
+            <%elsif p.category_id == 34 %>
+                [맛집]
+            
+            <!--모임/과외-->
+            <%elsif p.category_id == 41 %>
+                [소모임]
+                
+            <%elsif p.category_id == 42 %>
+                [영어 스터디]
+            
+            <%elsif p.category_id == 43 %>
+                [언어교환]
+            
+            <%elsif p.category_id == 44 %>
+                [과외]
+            
+            <!--법률/상담-->
+            <%elsif p.category_id == 51 %>
+                [텍스]
+                
+            <%elsif p.category_id == 52 %>
+                [연금]
+            
+            <%elsif p.category_id == 53 %>
+                [이민상담]
+            
+            <%elsif p.category_id == 54 %>
+                [유학상담]
+            
+            <!--구인/구직-->
+            <%elsif p.category_id == 61 %>
+                [구인]
+                
+            <%elsif p.category_id == 62 %>
+                [구직]
+                
+            <%elsif p.category_id == 63 %>
+                [게시판 개설 요청]
+            
+            <% end %>
+            </span>
+            
+            <% end %>
+              <%= p.title %>
+                <!--이미지가 있다면 아이콘 걸기!-->
+                <% if p.content.include?("<img src=") %> <i class="fas fa-image"></i> <% end %>
+                
+            </h2> 
+            
+            
+            <% require 'nokogiri' %>
+            <%doc = Nokogiri::HTML(p.content.to_s)%>
+            <%doc = doc.css("p").inner_text%>
+            <p class="small"> <%= doc.to_s %> </p>
     
-    <% i= @total + 1 %>
-      
-      <!--페이지가 2 이상 넘어가면 숫자를 맞춰주기 위해 page수 * 10 만큼 빼주기-->
-      <% if @page >=2 %>
-        <% i -= (@page-1) *10 %>
-      <% end %>
-      
-    <!--#시준 조회수 구현 -->  
-      <% @post.each do |p| %>
-        <article>
-          <% i-=1 %>
-          <a class="article" href="/posts/show/<%= p.id %>">
-          <h2 class="medium"><%= p.title %>
-              <!--이미지가 있다면 아이콘 걸기!-->
-              <% if p.content.include?("<img src=") %> <i class="fas fa-image"></i> <% end %>
-          </h2> 
-          <%#= content_tag(:div, p.content.html_safe, :class => "panel-body") %>
-          <!--p tag 만 지우면 되는줄 알았는데 아님..ㅠ html 의 태그들 자체를 지워야해서 tinymce 자체에 이걸 조정하는 게 있다는데 찾아봐도 잘 모르겠다ㅠㅠ-->
-          <% require 'nokogiri' %>
-          <%doc = Nokogiri::HTML(p.content.to_s)%>
-          <%doc = doc.css("p").inner_text%>
-          <p class="small"> <%= doc.to_s %> </p>
-          <time class="small"><%= "#{time_ago_in_words(p.created_at)} 전" %></time>
-          
-          
-          <% if @category == 23 %>
-                <h3 class="small"><i class="fa fa-user-o" aria-hidden="true"></i> 익명</h3>
-              <% else %>
-                <h3 class="small"><i class="fa fa-user-o" aria-hidden="true"></i> <%= p.user.username %></h3>
-              <% end %>
-         
-            <ul class="status">
-              <li class="vote"><i class="far fa-thumbs-up" style="color:#0505aa"></i>  <%= p.likes.size - p.hates.size  %> </li>
-              <li class="comment"><i class="far fa-comment-dots" style="color:#03b1ef"></i> <%= p.replies.size %> </li>
-            </ul>
-            <hr>
-            </a>
-        </article>
-      <% end %>
-  </div>
+            <time class="small"><%= "#{time_ago_in_words(p.created_at)} 전" %></time>
+            
+            <!--댓글 갯수 count-->
+            <% replySize = p.replies.size %>
+            <% a = (p.replies.size-1) %>
+            <% (0..a).each do |i| %>
+              <% replySize += p.replies[i].rereplies.size %>
+            <% end %>
+            <!--댓글 갯수 count 끝-->
+            
+            <% if @category == 23 %>
+                  <h3 class="small"><i class="fa fa-user-o" aria-hidden="true"></i> 익명</h3>
+            <% else %>
+                  <h3 class="small"><i class="fa fa-user-o" aria-hidden="true"></i> <%= p.user.username %></h3>
+            <% end %>
+            <% if @category == 00 %>
+                  <% if (HotPost.find_by(post_id:(p.id))) != nil %>
+                    &nbsp;&nbsp;&nbsp;<span style="color:#ff9b9b;font-size:15px;"><i class="fab fa-hotjar"> Hot</i></span>
+                  <% end %>
+                <% end %>
+              <ul class="status">
+                <li class="vote"><i class="far fa-thumbs-up" style="color:#0505aa"></i>  <%= p.likes.size - p.hates.size %> </li>
+                <li class="vote" style="color:#03b1ef"><i class="far fa-comment-dots" style="color:#03b1ef"></i> <%= replySize %> </li>
+                <li class="vote" style="color:gray;"> <i class="far fa-eye"></i> <%= "#{p.unique_impression_count}" %> </li>
+              </ul>
+              <hr>
+              
+              </a>
+              
+          </article>
+        <% end %>
+        
+        <div class="page_position">
+          <%= paginate @posts%>
+        </div>
+    </div>
+   
     <!--오른쪽 로그인 및 실시간 -->
     <div class="conA31" style="float:left;margin-left:5%;flex:2;margin-top:25px;">
        <div class="leftside">
          <!--로그인-->
-        <div class="card pconly conA311">
+        <div class="card pconly conA311" style=" padding:10px;">
             <form class="logged">
                <% if user_signed_in? %>
-                  <img src="https://cf-fpi.everytime.kr/0.png" class="picture">
-                  <h4 class="nickname" style="padding-top:5px;"><%= current_user.username %></h4>
-                  <p class="username"><a href="/users/sign_out" ><div class="conA3btn">로그아웃</div></a></p>
+                  <!--<img src="https://cf-fpi.everytime.kr/0.png" class="picture">-->
+                  <h5 class="nickname" style="padding-top:0px;"><%= current_user.username %> </h4>
+                  <a href="/users/sign_out"><button style="font-size:14px;" type="button" class="btn btn-outline-dark">로그아웃</button></a>
+                  <!--<p id="login_btn" class="username"><a id="login_btn" href="/users/sign_out" ><div class="conA3btn">로그아웃</div></a></p>-->
               <% else %>
-                  <p class="username"><a href="/users/sign_in"><div class="conA3btn">로그인</div></a></p>
+                  <!--<p class="username"><a id="login_btn" href="/users/sign_in"><div class="conA3btn">로그인</div></a></p>-->
+                  <button type="button" class="btn btn-outline-dark">로그인</button>
               <% end %>   
             </form>
         </div>
         <div class="card">
           <div class="menus">
             <div class="menuS" style="padding-left:0;">
-              <a href="/my_profile" class="myarticle"><i class="fas fa-user" style="color: #00FF55"></i>&nbsp;&nbsp; 프로필</a><br>
+              <a href="/my_profile" class="myarticle"><i class="fas fa-user" style="color: "></i>&nbsp;&nbsp; 프로필</a><br>
             </div>
             <div class="menuS" style="padding-left:0;">
-              <a href="/posts/myPost" class="myarticle"><i class="fas fa-list-ul" style="color: #4EAEE9;"></i>&nbsp;&nbsp; 내가 쓴 글</a><br>
+              <a href="/comments/index" onClick="window.open(this.href, '', 'width=500, height=545'); return false;" class="mycommentarticle"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;&nbsp; 쪽지함</a>
             </div>
             <div class="menuS" style="padding-left:0;">
-              <a href="/posts/myReply" class="mycommentarticle"><i class="far fa-comment" style="color: #A1D88F;"></i>&nbsp;&nbsp; 나의 댓글</a>
+              <a href="/posts/00/index" class="myarticle"><i class="fas fa-list-ul" style="color: ;"></i>&nbsp;&nbsp; 내가 쓴 글</a><br>
+            </div>
+            <div class="menuS" style="padding-left:0;">
+              <a href="/posts/myReply" class="mycommentarticle"><i class="far fa-comment" style="color: ;"></i>&nbsp;&nbsp; 나의 댓글</a>
             </div>
           </div>
         </div>
-        
-        <!--실시간 인기글-->
-        <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;">
-          <h3><a href="#"><strong>실시간 글</strong></a></h3>
-          <% posts_realtime = Post.all.reverse %>
-          <% (0..4).each do |i|%>
-            <div class="postlistA">
-              <div class="postlistAtext">
-                 <a class="article" href="/posts/show/<%= posts_realtime[i].id %>"><%= posts_realtime[i].title %></a><br>
+         
+         <!--실시간 인기글-->
+            <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;box-shadow: 2px 2px 0px 2px #c3cad8;">
+              <div class="postlistA" style="background-color:#62AEFF ;border-bottom:solid 1px #c5cbd0;">
+                <div class="postlistAtext" >
+                  <a href="/posts/hotPost" class="article" style="color:#f8f9fa;cursor:pointer; text-shadow: 0 0 3px black;"><i class="fas fa-fire" style="color:#00c9b7;"></i> &nbsp 실시간 인기글</a>
+                </div>
               </div>
+              <% hotPosts = HotPost.all.reverse %>
+              <% (0..4).each do |i|%>
+                <% hotpost = Post.find(hotPosts[i].post_id) %> 
+                <%if i==4 %>
+                  <div id="realtimeList"  class="postlistA" style="background-color:white;border-bottom:solid 0px #c5cbd0;">
+                <% else %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 1px #c5cbd0;">
+                <% end %>
+                  <div class="postlistAtext" >
+                     <a class="article" href="/posts/show/<%=hotpost.id%>"><%= hotpost.title.truncate(15, omission: '...') %></a><br>
+                  </div>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-        </div>
+            
+        
+         <!--실시간 인기글-->
+            <div class="ConB2" style="width:100%; margin-top:10px;margin-left:0px;margin-bottom;box-shadow: 2px 2px 0px 2px #c3cad8;">
+              <div class="postlistA" style="background-color:#62AEFF ;border-bottom:solid 1px #c5cbd0;">
+                <div class="postlistAtext" >
+                  <a class="article" style="color:#f8f9fa;cursor:context-menu;text-shadow: 0 0 3px black;"><i class="fa fa-refresh" aria-hidden="true" ></i> &nbsp 실시간 글</a>
+                </div>
+              </div>
+              <% posts_realtime = Post.all.reverse %>
+              <% (0..4).each do |i|%>
+                <%if i==4 %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 0px #c5cbd0;">
+                <% else %>
+                  <div class="postlistA" style="background-color:white;border-bottom:solid 1px #c5cbd0;">
+                <% end %>
+                  <div class="postlistAtext" >
+                     <a class="article" href="/posts/show/<%= posts_realtime[i].id %>"><%= posts_realtime[i].title.truncate(23, omission: '...') %></a><br>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        
         
       </div>
     </div>
     
   </div>
+
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <!--<table class="table table-striped">-->
-  <!--  <thead>-->
-  <!--    <tr>-->
-  <!--      <th scope="col" style="width:5%;">#</th>-->
-  <!--      <th scope="col" style="width:20%;">작성자</th>-->
-  <!--      <th scope="col" style="width:45%;">제목</th>-->
-  <!--      <th scope="col" style="width:10%;">작성날짜</th>-->
-  <!--      <th scope="col" style="width:10%;">조회수</th>-->
-  <!--      <th scope="col" style="width:10%;">좋아요</th>-->
-  <!--    </tr>-->
-  <!--  </thead>-->
-  <!--  <tbody>-->
-  <!--    <#% i= Post.where("category_id like ?", "#{@category}").count+1 %>-->
-      
-      <!--페이지가 2 이상 넘어가면 숫자를 맞춰주기 위해 page수 * 10 만큼 빼주기-->
-  <!--    <#% if @page >=2 %>-->
-  <!--      <#% i -= (@page-1) *10 %>-->
-  <!--    <#% end %>-->
-      
-    <!--#시준 조회수 구현 -->  
-  <!--    <#% @posts.each do |p| %>-->
-  <!--      <table border="0" width="100%">-->
-  <!--        <tr bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">-->
-  <!--            <#% i-=1 %>-->
-  <!--            <td width="5%"><div class="board_num"><#%= i %></div></td>-->
-              <!--익명게시판-->
-              
-  <!--            <#% if @category == 23 %>-->
-  <!--              <td width="20%" align="left" style="border-bottom: 1px dashed gray;"><i class="fa fa-user-o" aria-hidden="true"></i> 익명</td>-->
-  <!--            <#% else %>-->
-  <!--              <td width="20%" align="left" style="border-bottom: 1px dashed gray;"><i class="fa fa-user-o" aria-hidden="true"></i> <#%= p.user.username %></td>-->
-  <!--            <#% end %>-->
-              
-  <!--            <td width="45%" align="left" style="border-bottom: 1px dashed gray;"><div class="board_title"><a style="margin-left: 20px;" href="/posts/show/<#%= p.id %>"><#%= p.title %>-->
-              <!--이미지가 있다면 아이콘 걸기!-->
-  <!--            <#% if p.content.include?("<img src=") %> <i class="fas fa-image"></i> <#% end %>-->
-  <!--            </a></div></td>-->
-  <!--            <td width="10%" align="left" style="border-bottom: 1px dashed gray;"><i class="fa fa-clock-o" aria-hidden="true"></i> <#%= "#{time_ago_in_words(p.created_at)} 전" %></td>-->
-  <!--            <td width="10%" align="left" style="border-bottom: 1px dashed gray;"> <#%= "#{p.unique_impression_count} views" %></td>-->
-  <!--            <td bgcolor="#FEFFDC" width="10%" align="center" style="border-bottom: 1px dashed gray;"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <#%= p.likes.size %></td>-->
-  <!--        </tr>-->
-  <!--      </table>-->
-  <!--    <#% end %>-->
-  <!--  </tbody>-->
-  <!--</table>-->
-  <div style="clear:both;">
-    <%= page_entries_info @post %>
-    <%= paginate @post%>
-  </div>
 </div>
 
 <%= render "footer" %>
+
+
+<style>
+
+body{
+    background-color:#ebeef1;
+}
+</style>
