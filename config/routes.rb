@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  # 새로운 메인
-  get '/posts/main1' => 'posts/main1'
   # 쪽지
   get 'comments/index'
   get 'comments/userList'
